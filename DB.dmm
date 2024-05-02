@@ -1,0 +1,2212 @@
+{
+	"tables": {
+		"a369b939-c1c1-4d48-8456-07d030fe7a07": {
+			"id": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+			"visible": true,
+			"name": "Dossier Medical",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "c7ed9eb2-c991-444c-bf95-17ce0677e30a",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": false
+				},
+				{
+					"id": "1f5fc8bd-deb6-459c-acf3-a4c35c55098c",
+					"name": "antecedents",
+					"datatype": "a17a44d6-1093-42a1-bbee-57a2e6e20bf8",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": false
+				},
+				{
+					"id": "c2f2d7c9-7ade-4873-8dc4-c225f930ce1a",
+					"name": "information_Genrale",
+					"datatype": "0d6044ed-86f2-470b-a168-faffc832e534",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": false
+				},
+				{
+					"id": "fb960a67-9769-47fd-91e2-3cd7b1ae31cd",
+					"name": "Médicaments",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": true,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				},
+				{
+					"id": "48670006-8890-4780-a3cd-97562c2e2d95",
+					"name": "Patient",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				},
+				{
+					"id": "c6a20319-05d1-44a2-9800-3965fc77f7e3",
+					"name": "Examen_Tension",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": true,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				}
+			],
+			"relations": [
+				"ccda4a11-455a-432b-9b63-458a1adbe9cb",
+				"659e782f-ae22-404d-ac1f-ce499ab678a0",
+				"aaba8b58-888f-4d07-994e-81d3f96542c8",
+				"80ea208c-734c-4251-8594-0ecb9f3a74ce",
+				"f2658b59-5110-4ed2-b703-a4d64161d6a6",
+				"750603d2-5bcd-4f2b-a714-809f30ecd44d",
+				"0256c4d0-5236-42b3-b535-937d5dd22b64"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "4284bdbb-0005-4948-82ce-589bdcc67f34",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "524d2868-35d9-41b2-9cbe-778afd219b37",
+							"colid": "c7ed9eb2-c991-444c-bf95-17ce0677e30a"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"a17a44d6-1093-42a1-bbee-57a2e6e20bf8": {
+			"id": "a17a44d6-1093-42a1-bbee-57a2e6e20bf8",
+			"visible": false,
+			"name": "object",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "86e45d23-ed6c-475c-a462-86d5fb27888e",
+					"name": "Antecedent_Familiaux",
+					"datatype": "array",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "bab77ce7-2c7b-4666-991e-a388340be46b",
+					"name": "Antécédents Presonnels",
+					"datatype": "array",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [],
+			"lines": [],
+			"keys": [
+				{
+					"id": "63e7344d-d0ce-4de7-9e5b-c5528c441dcc",
+					"name": "Primary key",
+					"isPk": true,
+					"cols": []
+				},
+				{
+					"id": "e3403deb-5843-4543-8116-4ba104a77c20",
+					"isPk": false,
+					"name": "object_ai_1",
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"embeddable": true,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"0d6044ed-86f2-470b-a168-faffc832e534": {
+			"id": "0d6044ed-86f2-470b-a168-faffc832e534",
+			"visible": false,
+			"name": "object",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "9493285c-cb53-4695-bf16-6549f6e1e34a",
+					"name": "Poids",
+					"datatype": "decimal",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "6f74b025-a257-4706-81ff-374b984379df",
+					"name": "Taille",
+					"datatype": "decimal",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "40c1bc04-4363-49e5-8306-2beadf4f5bde",
+					"name": "genre",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "05ad913b-7eca-4971-b7f9-3ddd8b696809",
+					"name": "Ville",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "2a1aa8b8-bc4b-4338-ac4b-061e40be6da9",
+					"name": "Situation Familaile",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "32930e01-9eea-4e7d-9fed-b9d0262099db",
+					"name": "Date de naissance",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [],
+			"lines": [],
+			"keys": [
+				{
+					"id": "e22c005c-3069-47e7-bc39-1dff552e774b",
+					"name": "Primary key",
+					"isPk": true,
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"embeddable": true,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"fccbe281-0b88-42a0-a06b-2b697bd6d497": {
+			"id": "fccbe281-0b88-42a0-a06b-2b697bd6d497",
+			"visible": true,
+			"name": "Médicaments",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "b4b1a47b-5679-4de2-8f37-b517f237bd2b",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "5f1a2795-eaa3-45b3-9fa8-c2f66aecb147",
+					"name": "Nom",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "7904a0cb-d3d1-4ba6-85d7-2a643eb0f9b2",
+					"name": "doze",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "f297fe25-c349-4715-8b92-817966785567",
+					"name": "Mg_g",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "de80a545-6aef-4ed8-ad27-3b0f63b33a5f",
+					"name": "Qr",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "c8d2fb52-3ab9-4c0e-94a1-e828748b0169",
+					"name": "Temps",
+					"datatype": "array",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"ccda4a11-455a-432b-9b63-458a1adbe9cb",
+				"80ea208c-734c-4251-8594-0ecb9f3a74ce",
+				"f2658b59-5110-4ed2-b703-a4d64161d6a6",
+				"750603d2-5bcd-4f2b-a714-809f30ecd44d",
+				"0256c4d0-5236-42b3-b535-937d5dd22b64"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "a93d8afa-b232-488f-9403-925340f1ad31",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "9f1cceac-74c3-45d6-9aed-8d9fed438803",
+							"colid": "b4b1a47b-5679-4de2-8f37-b517f237bd2b"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"67955148-baa7-41e1-b31a-638144ced17a": {
+			"id": "67955148-baa7-41e1-b31a-638144ced17a",
+			"visible": true,
+			"name": "Examen_Tension",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "beafeea9-bcf1-4cbc-a569-77e88e86b7bc",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "1922e2c6-aec4-4e2d-bb32-d9cd34b0ecb9",
+					"name": "Systolique",
+					"datatype": "decimal",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "258f4b0a-8c7a-413d-b1ca-11be7e186b42",
+					"name": "diastolique",
+					"datatype": "decimal",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "68fe1f1e-d4ca-4c34-90ea-48d11dbdbe97",
+					"name": "Date_Exam",
+					"datatype": "date",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "318811f6-30ee-4204-b02b-4b28ae514bfe",
+					"name": "Heure",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"aaba8b58-888f-4d07-994e-81d3f96542c8",
+				"154329db-120c-48ff-9e5a-3eeb24d30bf8"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "94d3ed6a-fd9a-459d-9abc-3bde9bdda849",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "aeb42406-e89d-47c5-b623-13abe1b6052c",
+							"colid": "beafeea9-bcf1-4cbc-a569-77e88e86b7bc"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"8efff73f-4f56-46cf-ac68-7175c832428d": {
+			"id": "8efff73f-4f56-46cf-ac68-7175c832428d",
+			"visible": true,
+			"name": "Rendez_vous",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "fb128232-1a9f-402c-95a1-4e3d33b9ed78",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "9e489884-ee14-4518-96fd-647380e99e19",
+					"name": "Date",
+					"datatype": "date",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "fca9f242-2f88-43df-91be-63c33fc4d943",
+					"name": "Heure",
+					"datatype": "date",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "6fc914a5-603f-409b-b7fe-0dc0f4f314d4",
+					"name": "Medecine",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				},
+				{
+					"id": "00975aac-c2df-45ae-b1b7-54daf450c685",
+					"name": "Patient",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				}
+			],
+			"relations": [
+				"b8949cac-b61e-4855-ad2d-9a9ae73b187d",
+				"c1272189-ca30-41bb-af93-508bf8b887d5"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "024d8251-3d5f-435f-b501-464004ed1447",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "1c58aec5-c981-48f2-9be5-a21ec74bbbb3",
+							"colid": "fb128232-1a9f-402c-95a1-4e3d33b9ed78"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"c71f3513-0491-475d-bd22-5b5b2a470a79": {
+			"id": "c71f3513-0491-475d-bd22-5b5b2a470a79",
+			"visible": true,
+			"name": "ChatHistorique",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "786fc799-4b1c-4708-a7aa-06dd5a6b3ee9",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "c65cba7e-2ea5-4859-ab37-3f123b811330",
+					"name": "Patient",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				},
+				{
+					"id": "812fcbb1-ff73-4959-9a39-7c9b731f6253",
+					"name": "Message",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": true,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				},
+				{
+					"id": "949efd17-b756-4cde-8c07-b31f280aaf5c",
+					"name": "Medecine",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				}
+			],
+			"relations": [
+				"7e54705c-13a4-4f29-93db-24c8a934b706",
+				"2cf2e0c6-5631-45c8-89cb-3ddbbe597bda",
+				"01a4b3af-25b7-4f51-9200-cd23b413fe2c"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "cd2f5f35-b17d-4c3e-b1ff-1745849abcc0",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "b4fc550f-ceba-403a-a030-f5eaa84ec0e2",
+							"colid": "786fc799-4b1c-4708-a7aa-06dd5a6b3ee9"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"2c8a6fbe-aa11-46ec-94b7-8e7d973710c4": {
+			"id": "2c8a6fbe-aa11-46ec-94b7-8e7d973710c4",
+			"visible": true,
+			"name": "Message",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "4fe60a97-2435-46b3-bdb6-39579cbc798f",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "04f06915-5c89-4d28-8cf2-43d75d7e365b",
+					"name": "status",
+					"datatype": "enum",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "[\"Read\",\"notRead\"]",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "6055347f-0032-49de-a9a3-14bbf0ea5a88",
+					"name": "Content",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "eeccea4a-2caa-4de7-b0e7-b27284263ba6",
+					"name": "date",
+					"datatype": "date",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"2cf2e0c6-5631-45c8-89cb-3ddbbe597bda"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "6bda23df-aafc-4e3a-812e-3b2f91de103c",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "16c11b11-46fa-4215-848f-2e3383797525",
+							"colid": "4fe60a97-2435-46b3-bdb6-39579cbc798f"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"906c6172-5b8e-4446-aa84-93c7ce6b0071": {
+			"id": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"visible": true,
+			"name": "Users",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "1217f939-f2fd-454a-9ab8-15d23502d0cf",
+					"name": "name",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "bb7e5f9c-316c-4357-a9a9-4c31642e1fcc",
+					"name": "email",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "b3268bf2-1582-4641-b84d-72e8b367bfe6",
+					"name": "Role",
+					"datatype": "enum",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "[\"Patient\",\"Medecine\"]\n\n",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "ce93f33d-99c5-4cb7-845f-74336cf4b863",
+					"name": "password",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"659e782f-ae22-404d-ac1f-ce499ab678a0",
+				"b8949cac-b61e-4855-ad2d-9a9ae73b187d",
+				"c1272189-ca30-41bb-af93-508bf8b887d5",
+				"7e54705c-13a4-4f29-93db-24c8a934b706",
+				"01a4b3af-25b7-4f51-9200-cd23b413fe2c",
+				"b5c3c0bf-8a90-4696-accf-207a70870b43",
+				"b890353f-dc64-4fd9-a2dd-f27b90fbaeac",
+				"2a058922-f0bf-4b7b-a976-97f53d3d815a"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "9b60087c-6b5b-4de2-bf85-92d0c3b41d44",
+							"colid": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "strict",
+			"validationAction": "error",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"f340e1ae-5c85-4216-9962-41722e0919c6": {
+			"id": "f340e1ae-5c85-4216-9962-41722e0919c6",
+			"visible": true,
+			"name": "Notification",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "df785503-5ad6-4589-8bf8-3b4bea4d1532",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "8c7140d8-26d6-4e2f-90ac-5e993a83d0f9",
+					"name": "Content",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "93912a12-ed97-4599-b595-983ae7fa04a5",
+					"name": "type",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "1defe5f9-2654-4c81-838e-0bff0cf60273",
+					"name": "Users",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				}
+			],
+			"relations": [
+				"c70d76bf-b655-424a-9575-4381f02aab15",
+				"b5c3c0bf-8a90-4696-accf-207a70870b43"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "77f2959a-1e40-4213-a083-d97166f0dca9",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "c3f0f826-1d80-40a8-bea1-8a274e46a73f",
+							"colid": "df785503-5ad6-4589-8bf8-3b4bea4d1532"
+						}
+					]
+				},
+				{
+					"id": "4f7ec4af-ee29-40f3-8244-10d0ebd7c1bf",
+					"isPk": false,
+					"name": "Notification_ai_1",
+					"cols": [
+						{
+							"id": "f6dc8cd0-5e14-4828-8aba-a8a39b99608d",
+							"colid": "93912a12-ed97-4599-b595-983ae7fa04a5"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"ff5a97e7-2e07-432c-8133-f81ad81c2570": {
+			"id": "ff5a97e7-2e07-432c-8133-f81ad81c2570",
+			"visible": true,
+			"name": "Type_Notification",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "9443517c-0963-4cab-b131-ecc4963e0635",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				},
+				{
+					"id": "d7576dee-f613-4d5d-b8fb-38d62a92baa0",
+					"name": "libellé",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"c70d76bf-b655-424a-9575-4381f02aab15"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "5b46cbd1-a96d-4831-9dac-904943afdbe9",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "f1cae46d-b626-45c6-bc3a-330468f480a9",
+							"colid": "9443517c-0963-4cab-b131-ecc4963e0635"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"cd5e0d97-b67a-4fe4-8c15-382b227b0d1c": {
+			"id": "cd5e0d97-b67a-4fe4-8c15-382b227b0d1c",
+			"visible": true,
+			"name": "Activité",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "5acee14f-aff9-4d51-9a67-c06842c64fff",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "1197ec38-27b1-4eae-841b-a4725d57cef5",
+					"name": "Poids",
+					"datatype": "decimal",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "ede40e6a-d683-44e2-becc-411992b735db",
+					"name": "Taille",
+					"datatype": "decimal",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "d42000cc-1fbd-4500-80a5-9097ef53e5d3",
+					"name": "Patient",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				},
+				{
+					"id": "a4770a99-f02a-4292-8868-dd0f25547bec",
+					"name": "IMC",
+					"datatype": "double",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"b890353f-dc64-4fd9-a2dd-f27b90fbaeac"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "67768979-3c88-4039-bd6b-2e15c20a1f23",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "f7848e2d-9568-46e2-8936-6a16ef7e2fde",
+							"colid": "5acee14f-aff9-4d51-9a67-c06842c64fff"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"8145455e-b1cc-4105-9770-1613560ec311": {
+			"id": "8145455e-b1cc-4105-9770-1613560ec311",
+			"visible": true,
+			"name": "Recomandation",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "211eec38-0215-4108-8a06-08feb3feb573",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "b9431da0-17dc-476e-8517-7043eb19ffae",
+					"name": "Examen_Tension",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": true,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				},
+				{
+					"id": "7cdc3c5d-3e06-45bb-8c64-8b466dd9dafa",
+					"name": "Users",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": "",
+					"fk": true
+				}
+			],
+			"relations": [
+				"154329db-120c-48ff-9e5a-3eeb24d30bf8",
+				"2a058922-f0bf-4b7b-a976-97f53d3d815a"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "49a0e204-81ac-4ff3-9789-7aef93f36f9b",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "7bb70220-3985-4e15-aa2e-9ccbc1d1880d",
+							"colid": "211eec38-0215-4108-8a06-08feb3feb573"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"beforeScript": "",
+			"afterScript": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		}
+	},
+	"relations": {
+		"ccda4a11-455a-432b-9b63-458a1adbe9cb": {
+			"id": "ccda4a11-455a-432b-9b63-458a1adbe9cb",
+			"visible": true,
+			"name": "Médicaments_Dossier Medical",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "a93d8afa-b232-488f-9403-925340f1ad31",
+			"parent": "fccbe281-0b88-42a0-a06b-2b697bd6d497",
+			"child": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "67c31847-7952-4efc-90b8-722d7842d264",
+					"parentcol": "b4b1a47b-5679-4de2-8f37-b517f237bd2b",
+					"childcol": "fb960a67-9769-47fd-91e2-3cd7b1ae31cd"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"aaba8b58-888f-4d07-994e-81d3f96542c8": {
+			"id": "aaba8b58-888f-4d07-994e-81d3f96542c8",
+			"visible": true,
+			"name": "Examen_Tension_Dossier Medical",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "94d3ed6a-fd9a-459d-9abc-3bde9bdda849",
+			"parent": "67955148-baa7-41e1-b31a-638144ced17a",
+			"child": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "e7e497e2-8c54-43f8-b468-fb0f93774bf8",
+					"parentcol": "beafeea9-bcf1-4cbc-a569-77e88e86b7bc",
+					"childcol": "c6a20319-05d1-44a2-9800-3965fc77f7e3"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"80ea208c-734c-4251-8594-0ecb9f3a74ce": {
+			"id": "80ea208c-734c-4251-8594-0ecb9f3a74ce",
+			"visible": true,
+			"name": "Médicaments_Médicaments",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "a93d8afa-b232-488f-9403-925340f1ad31",
+			"parent": "fccbe281-0b88-42a0-a06b-2b697bd6d497",
+			"child": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "db93dde8-4e41-4c89-a0fb-cad557f0dcc3",
+					"parentcol": "b4b1a47b-5679-4de2-8f37-b517f237bd2b",
+					"childcol": "fb960a67-9769-47fd-91e2-3cd7b1ae31cd"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"2cf2e0c6-5631-45c8-89cb-3ddbbe597bda": {
+			"id": "2cf2e0c6-5631-45c8-89cb-3ddbbe597bda",
+			"visible": true,
+			"name": "Message_ChatHistorique",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "6bda23df-aafc-4e3a-812e-3b2f91de103c",
+			"parent": "2c8a6fbe-aa11-46ec-94b7-8e7d973710c4",
+			"child": "c71f3513-0491-475d-bd22-5b5b2a470a79",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "af380402-c4ad-4199-a038-b0390a8b3340",
+					"parentcol": "4fe60a97-2435-46b3-bdb6-39579cbc798f",
+					"childcol": "812fcbb1-ff73-4959-9a39-7c9b731f6253"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"659e782f-ae22-404d-ac1f-ce499ab678a0": {
+			"id": "659e782f-ae22-404d-ac1f-ce499ab678a0",
+			"visible": true,
+			"name": "Users_Dossier Medical",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+			"parent": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"child": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "a45ed5fd-3560-4939-92e3-537fd5dcca65",
+					"parentcol": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"childcol": "48670006-8890-4780-a3cd-97562c2e2d95"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"b8949cac-b61e-4855-ad2d-9a9ae73b187d": {
+			"id": "b8949cac-b61e-4855-ad2d-9a9ae73b187d",
+			"visible": true,
+			"name": "Users_Rendez_vous",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+			"parent": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"child": "8efff73f-4f56-46cf-ac68-7175c832428d",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "e8e323c2-9cd9-401c-bfd0-8e6194d2c600",
+					"parentcol": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"childcol": "6fc914a5-603f-409b-b7fe-0dc0f4f314d4"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"c1272189-ca30-41bb-af93-508bf8b887d5": {
+			"id": "c1272189-ca30-41bb-af93-508bf8b887d5",
+			"visible": true,
+			"name": "Users_Rendez_vous",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+			"parent": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"child": "8efff73f-4f56-46cf-ac68-7175c832428d",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "f371deef-6c40-43fd-8cae-d49042b09842",
+					"parentcol": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"childcol": "00975aac-c2df-45ae-b1b7-54daf450c685"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"7e54705c-13a4-4f29-93db-24c8a934b706": {
+			"id": "7e54705c-13a4-4f29-93db-24c8a934b706",
+			"visible": true,
+			"name": "Users_collection1",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+			"parent": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"child": "c71f3513-0491-475d-bd22-5b5b2a470a79",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "e271dd42-0cfc-45ef-8a48-4bc6c7373bfe",
+					"parentcol": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"childcol": "c65cba7e-2ea5-4859-ab37-3f123b811330"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"01a4b3af-25b7-4f51-9200-cd23b413fe2c": {
+			"id": "01a4b3af-25b7-4f51-9200-cd23b413fe2c",
+			"visible": true,
+			"name": "Users_ChatHistorique",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+			"parent": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"child": "c71f3513-0491-475d-bd22-5b5b2a470a79",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "09600383-5e30-41ef-8223-b0fcdd962071",
+					"parentcol": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"childcol": "949efd17-b756-4cde-8c07-b31f280aaf5c"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"c70d76bf-b655-424a-9575-4381f02aab15": {
+			"id": "c70d76bf-b655-424a-9575-4381f02aab15",
+			"visible": true,
+			"name": "type__id",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "4f7ec4af-ee29-40f3-8244-10d0ebd7c1bf",
+			"parent": "f340e1ae-5c85-4216-9962-41722e0919c6",
+			"child": "ff5a97e7-2e07-432c-8133-f81ad81c2570",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "b1156211-33c5-43e4-8569-8468b408b7da",
+					"parentcol": "93912a12-ed97-4599-b595-983ae7fa04a5",
+					"childcol": "9443517c-0963-4cab-b131-ecc4963e0635"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"b5c3c0bf-8a90-4696-accf-207a70870b43": {
+			"id": "b5c3c0bf-8a90-4696-accf-207a70870b43",
+			"visible": true,
+			"name": "Users_Notification",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+			"parent": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"child": "f340e1ae-5c85-4216-9962-41722e0919c6",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "53305362-9d1c-4789-927e-94efb3decbfa",
+					"parentcol": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"childcol": "1defe5f9-2654-4c81-838e-0bff0cf60273"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"b890353f-dc64-4fd9-a2dd-f27b90fbaeac": {
+			"id": "b890353f-dc64-4fd9-a2dd-f27b90fbaeac",
+			"visible": true,
+			"name": "Users_Activité",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+			"parent": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"child": "cd5e0d97-b67a-4fe4-8c15-382b227b0d1c",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "65a67cbe-627b-4b66-b56f-73e8cd866284",
+					"parentcol": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"childcol": "d42000cc-1fbd-4500-80a5-9097ef53e5d3"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"154329db-120c-48ff-9e5a-3eeb24d30bf8": {
+			"id": "154329db-120c-48ff-9e5a-3eeb24d30bf8",
+			"visible": true,
+			"name": "Examen_Tension_Recomandation",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "94d3ed6a-fd9a-459d-9abc-3bde9bdda849",
+			"parent": "67955148-baa7-41e1-b31a-638144ced17a",
+			"child": "8145455e-b1cc-4105-9770-1613560ec311",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "c0f833e7-1049-4702-94f9-7795960bc46f",
+					"parentcol": "beafeea9-bcf1-4cbc-a569-77e88e86b7bc",
+					"childcol": "b9431da0-17dc-476e-8517-7043eb19ffae"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"2a058922-f0bf-4b7b-a976-97f53d3d815a": {
+			"id": "2a058922-f0bf-4b7b-a976-97f53d3d815a",
+			"visible": true,
+			"name": "Users_Recomandation",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "18d92df5-b179-4304-acde-ff0ef69dc0ff",
+			"parent": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+			"child": "8145455e-b1cc-4105-9770-1613560ec311",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "d4655382-9ec0-4ee2-8769-7ca8eb933570",
+					"parentcol": "42fd8de4-d069-44e0-a4fc-dbc2f6336d4e",
+					"childcol": "7cdc3c5d-3e06-45bb-8c64-8b466dd9dafa"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"f2658b59-5110-4ed2-b703-a4d64161d6a6": {
+			"id": "f2658b59-5110-4ed2-b703-a4d64161d6a6",
+			"visible": true,
+			"name": "Médicaments_Médicaments",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "a93d8afa-b232-488f-9403-925340f1ad31",
+			"parent": "fccbe281-0b88-42a0-a06b-2b697bd6d497",
+			"child": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "5f76d2c3-c592-456e-bf4a-449e720b0098",
+					"parentcol": "b4b1a47b-5679-4de2-8f37-b517f237bd2b",
+					"childcol": "fb960a67-9769-47fd-91e2-3cd7b1ae31cd"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"750603d2-5bcd-4f2b-a714-809f30ecd44d": {
+			"id": "750603d2-5bcd-4f2b-a714-809f30ecd44d",
+			"visible": true,
+			"name": "Médicaments_Médicaments",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "a93d8afa-b232-488f-9403-925340f1ad31",
+			"parent": "fccbe281-0b88-42a0-a06b-2b697bd6d497",
+			"child": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "e19f8081-03d4-43c4-9365-43634a8cd6ef",
+					"parentcol": "b4b1a47b-5679-4de2-8f37-b517f237bd2b",
+					"childcol": "fb960a67-9769-47fd-91e2-3cd7b1ae31cd"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		},
+		"0256c4d0-5236-42b3-b535-937d5dd22b64": {
+			"id": "0256c4d0-5236-42b3-b535-937d5dd22b64",
+			"visible": true,
+			"name": "Médicaments_Médicaments",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "a93d8afa-b232-488f-9403-925340f1ad31",
+			"parent": "fccbe281-0b88-42a0-a06b-2b697bd6d497",
+			"child": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "af88fa46-3915-437e-a283-174e8a822f6b",
+					"parentcol": "b4b1a47b-5679-4de2-8f37-b517f237bd2b",
+					"childcol": "fb960a67-9769-47fd-91e2-3cd7b1ae31cd"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent"
+		}
+	},
+	"notes": {},
+	"lines": {},
+	"model": {
+		"name": "STAGE_Projet",
+		"id": "27dc26cc-e1d7-45d8-b237-d7ad1e21e06b",
+		"activeDiagram": "b10f773b-03db-42a5-86c8-d62d70ee110a",
+		"desc": "",
+		"path": "",
+		"type": "MONGODB",
+		"version": 1,
+		"parentTableInFkCols": true,
+		"caseConvention": "under",
+		"replaceSpace": "_",
+		"color": "transparent",
+		"sideSelections": true,
+		"isDirty": true,
+		"storedin": {
+			"major": 8,
+			"minor": 5,
+			"extra": 1
+		},
+		"laststoredin": {
+			"major": 8,
+			"minor": 5,
+			"extra": 1
+		},
+		"writeFileParam": false,
+		"authorName": "",
+		"companyDetails": "",
+		"companyUrl": "",
+		"def_coltopk": true,
+		"def_validationLevel": "na",
+		"def_validationAction": "na",
+		"def_collation": "",
+		"def_others": "",
+		"connectionVersion": "",
+		"lastSaved": 1714422327414
+	},
+	"otherObjects": {},
+	"diagrams": {
+		"b10f773b-03db-42a5-86c8-d62d70ee110a": {
+			"name": "Main Diagram",
+			"description": "",
+			"id": "b10f773b-03db-42a5-86c8-d62d70ee110a",
+			"keysgraphics": true,
+			"linegraphics": "detailed",
+			"zoom": 0.6,
+			"background": "transparent",
+			"lineColor": "transparent",
+			"isOpen": true,
+			"main": true,
+			"diagramItems": {
+				"a369b939-c1c1-4d48-8456-07d030fe7a07": {
+					"referencedItemId": "a369b939-c1c1-4d48-8456-07d030fe7a07",
+					"x": 511,
+					"y": 75,
+					"gHeight": 135,
+					"gWidth": 276,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"a17a44d6-1093-42a1-bbee-57a2e6e20bf8": {
+					"referencedItemId": "a17a44d6-1093-42a1-bbee-57a2e6e20bf8",
+					"x": -1,
+					"y": -1,
+					"gHeight": -1,
+					"gWidth": -1,
+					"color": "#ffffff",
+					"background": "transparent",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": true
+				},
+				"0d6044ed-86f2-470b-a168-faffc832e534": {
+					"referencedItemId": "0d6044ed-86f2-470b-a168-faffc832e534",
+					"x": -1,
+					"y": -1,
+					"gHeight": -1,
+					"gWidth": -1,
+					"color": "#ffffff",
+					"background": "transparent",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": true
+				},
+				"fccbe281-0b88-42a0-a06b-2b697bd6d497": {
+					"referencedItemId": "fccbe281-0b88-42a0-a06b-2b697bd6d497",
+					"x": 1056,
+					"y": 203,
+					"gHeight": 135,
+					"gWidth": 182,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"67955148-baa7-41e1-b31a-638144ced17a": {
+					"referencedItemId": "67955148-baa7-41e1-b31a-638144ced17a",
+					"x": 1038,
+					"y": 389,
+					"gHeight": 117,
+					"gWidth": 219,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"8efff73f-4f56-46cf-ac68-7175c832428d": {
+					"referencedItemId": "8efff73f-4f56-46cf-ac68-7175c832428d",
+					"x": 111,
+					"y": 81,
+					"gHeight": 117,
+					"gWidth": 213,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"c71f3513-0491-475d-bd22-5b5b2a470a79": {
+					"referencedItemId": "c71f3513-0491-475d-bd22-5b5b2a470a79",
+					"x": 99,
+					"y": 568,
+					"gHeight": 99,
+					"gWidth": 214,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"2c8a6fbe-aa11-46ec-94b7-8e7d973710c4": {
+					"referencedItemId": "2c8a6fbe-aa11-46ec-94b7-8e7d973710c4",
+					"x": 105,
+					"y": 748,
+					"gHeight": 99,
+					"gWidth": 191,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"906c6172-5b8e-4446-aa84-93c7ce6b0071": {
+					"referencedItemId": "906c6172-5b8e-4446-aa84-93c7ce6b0071",
+					"x": 181,
+					"y": 299,
+					"gHeight": 117,
+					"gWidth": 201,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"f340e1ae-5c85-4216-9962-41722e0919c6": {
+					"referencedItemId": "f340e1ae-5c85-4216-9962-41722e0919c6",
+					"x": 630,
+					"y": 596,
+					"gHeight": 99,
+					"gWidth": 191,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"ff5a97e7-2e07-432c-8133-f81ad81c2570": {
+					"referencedItemId": "ff5a97e7-2e07-432c-8133-f81ad81c2570",
+					"x": 880,
+					"y": 769,
+					"gHeight": 63,
+					"gWidth": 180,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"cd5e0d97-b67a-4fe4-8c15-382b227b0d1c": {
+					"referencedItemId": "cd5e0d97-b67a-4fe4-8c15-382b227b0d1c",
+					"x": 518,
+					"y": 772,
+					"gHeight": 117,
+					"gWidth": 198,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"8145455e-b1cc-4105-9770-1613560ec311": {
+					"referencedItemId": "8145455e-b1cc-4105-9770-1613560ec311",
+					"x": 1064,
+					"y": 553,
+					"gHeight": 81,
+					"gWidth": 259,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				}
+			},
+			"scroll": {
+				"x": 0,
+				"y": 0
+			},
+			"type": "erd",
+			"showHorizontal": true,
+			"showDescriptions": true,
+			"showIndicators": true,
+			"showProgress": true,
+			"lineWidth": "2",
+			"boxSize": "0",
+			"boxSpacing": "2",
+			"boxAlign": "center",
+			"showIndicatorCaptions": true,
+			"showEstimatedSize": false,
+			"showSchemaContainer": true,
+			"showEmbeddedInParents": true,
+			"showCardinalityCaptions": true,
+			"showRelationshipNames": false,
+			"showLineCaptions": false,
+			"showColumns": true,
+			"showColumnDataTypes": true,
+			"showSampleData": false,
+			"showTableIndexes": true,
+			"showTableDescriptions": false,
+			"showRelations": true,
+			"backgroundImage": "na",
+			"descriptionsColor": "transparent",
+			"embeddedSpacing": "2",
+			"showMainIcon": true,
+			"showLabels": true,
+			"showCustomizations": false
+		}
+	},
+	"diagramsOrder": [],
+	"order": [],
+	"collapsedTreeItems": [],
+	"reverseStats": {}
+}
