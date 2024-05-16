@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+
+import 'package:google_fonts/google_fonts.dart';
+
+class Text_Field extends StatelessWidget {
+  Text_Field({
+    super.key,
+    required this.label,
+    required this.hint,
+    required this.isPassword,
+    required this.keyboard,
+    required this.txtEditController,
+    // required this.focusNode,
+    required this.onChanged,
+  });
+
+  final String label;
+  final String hint;
+  final bool isPassword;
+  final TextInputType keyboard;
+  final TextEditingController txtEditController;
+  final void Function(String value) onChanged;
+  // late FocusNode focusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      // focusNode: focusNode,
+      keyboardType: keyboard,
+      obscureText: isPassword,
+      controller: txtEditController,
+      onChanged: onChanged,
+
+      cursorColor: const Color.fromARGB(255, 7, 82, 96),
+      decoration: InputDecoration(
+        hintText: hint,
+        filled: true,
+        fillColor: Color.fromARGB(255, 203, 226, 231),
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              20,
+            ),
+          ),
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 7, 82, 96),
+          ),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              20,
+            ),
+          ),
+          borderSide: BorderSide(
+            color: Color.fromARGB(0, 177, 34, 34),
+          ),
+        ),
+        labelText: label,
+        labelStyle: GoogleFonts.roboto(
+          color: const Color.fromARGB(255, 16, 15, 15),
+        ),
+      ),
+    );
+  }
+}
