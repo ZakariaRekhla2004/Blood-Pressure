@@ -29,13 +29,12 @@ class Text_Field extends StatelessWidget {
       keyboardType: keyboard,
       obscureText: isPassword,
       controller: txtEditController,
-      onChanged: onChanged,
-
+      onChanged: onChanged,  
       cursorColor: const Color.fromARGB(255, 7, 82, 96),
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
-        fillColor: Color.fromARGB(255, 203, 226, 231),
+        fillColor: Color.fromRGBO(210, 233, 238, 1),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
@@ -61,6 +60,10 @@ class Text_Field extends StatelessWidget {
         labelStyle: GoogleFonts.roboto(
           color: const Color.fromARGB(255, 16, 15, 15),
         ),
+        hintStyle: GoogleFonts.roboto(
+          fontSize: 14, // Reduced hint text size
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0), // Adjust padding to reduce height
       ),
     );
   }

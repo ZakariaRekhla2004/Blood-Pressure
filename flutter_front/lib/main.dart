@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_front/screens/auth/view/CompleteDossier.dart';
 import 'package:flutter_front/screens/auth/view/Login.dart';
 import 'package:flutter_front/screens/home/views/home.dart';
 import 'package:flutter_front/utils/Routes.dart';
@@ -22,10 +23,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: CheckAuth(),
       onGenerateRoute: Routes.generateRoute,
-
     );
   }
 }
+
 class CheckAuth extends StatefulWidget {
   const CheckAuth({super.key});
 
@@ -35,34 +36,40 @@ class CheckAuth extends StatefulWidget {
 
 class _CheckAuthState extends State<CheckAuth> {
   bool isAuth = false;
+
+  bool comp = false;
+
+  
+
   @override
   void initState() {
     _checkIfLoggedIn();
+    // _checkIfCompleted();
     super.initState();
   }
+  
 
-  void _checkIfLoggedIn() async{
+  void _checkIfLoggedIn() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var token = localStorage.getString('token');
-    if(token != null){
+    if (token != null) {
       setState(() {
         isAuth = true;
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     Widget child;
-    if (isAuth) {
-      child = YourHomePage();
-      // child = Login();
 
-    } else {
+    if (!isAuth) {
       child = Login();
-    }    
+    } else {
+        child = Login();
+    }
     return Scaffold(
       body: child,
     );
   }
 }
-

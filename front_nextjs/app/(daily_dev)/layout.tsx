@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/base/Navbar";
 import Sidebar from "@/components/base/Sidebar";
 import { getServerSession } from "next-auth";
@@ -5,6 +6,7 @@ import {
   CustomSession,
   authOptions,
 } from "../api/auth/[...nextauth]/authOptions";
+import { useRouter } from "next/navigation";
 
 export default async function DailyDevLayout({
   children,
@@ -13,9 +15,9 @@ export default async function DailyDevLayout({
 }>) {
   const session = (await getServerSession(authOptions)) as CustomSession;
   return (
-    <div className="overflow-y-hidden h-screen">
+    <div className="h-full">
       <Navbar user={session.user!} />
-      <div className="flex ">
+      <div className="flex h-full ">
         <Sidebar />
         <div className="flex justify-center items-center w-full overflow-y-scroll ">
           {children}

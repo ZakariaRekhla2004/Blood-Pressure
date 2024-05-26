@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu1";
 import {
   Dialog,
   DialogContent,
@@ -25,10 +27,11 @@ import myAxios from "@/lib/axios.config";
 import { LOGOUT_URL, UPDATE_PROFILE } from "@/lib/apiEndPoints";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/authOptions";
 import { toast } from "react-toastify";
-import { getImageUrl } from "@/lib/utils";
+// import { getImageUrl } from "@/lib/utils";
+import UserAvatar from "../common/UserAvatar";
 
 export default function ProfileMenu({ user }: { user: CustomUser }) {
-  console.log("aa", user.token);
+ 
 
   const [logoutOpen, setLogOutOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -97,9 +100,10 @@ export default function ProfileMenu({ user }: { user: CustomUser }) {
   };
   return (
     <>
+    
       {/* Logout dialog */}
-      <Dialog open={logoutOpen} onOpenChange={setLogOutOpen}>
-        <DialogContent>
+      <Dialog open={logoutOpen} onOpenChange={setLogOutOpen} >
+        <DialogContent className="bg-white">
           <DialogHeader>
             <DialogTitle>Are you absolutely sure?</DialogTitle>
             <DialogDescription>
@@ -111,10 +115,9 @@ export default function ProfileMenu({ user }: { user: CustomUser }) {
             <Button
               variant="destructive"
               onClick={() => {
-                // console.log("aaaaaaaaaaaaaaaaaaaaaaaa")
                 logoutUser();
-                
               }}
+              className="bg-red-500"
             >
               Yes Logout!
             </Button>
@@ -154,14 +157,14 @@ export default function ProfileMenu({ user }: { user: CustomUser }) {
 
       <DropdownMenu>
         <DropdownMenuTrigger>
-          {user.profile_image ? (
+          {/* {user.profile_image ? (
             <Image
               src={getImageUrl(user.profile_image)}
               width={40}
               height={40}
               alt="logo"
             />
-          ) : (
+          ) : ( */}
             <Image
               src="/avatar.png"
               width={40}
@@ -169,9 +172,9 @@ export default function ProfileMenu({ user }: { user: CustomUser }) {
               alt="logo"
               className="cursor-pointer"
             />
-          )}
+          {/* )} */}
             </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent className="bg-white">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setProfileOpen(true)}>

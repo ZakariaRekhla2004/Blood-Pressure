@@ -1,10 +1,15 @@
+import 'dart:ffi';
+
 import 'dart:convert';
+import 'package:flutter_front/components/DatePicker.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_front/api/auth.dart';
+import 'package:flutter_front/components/HoursPicker.dart';
 import 'package:flutter_front/components/TextField.dart';
 import 'package:flutter_front/components/loginWidgets/ButtonWidget.dart';
 import 'package:flutter_front/screens/home/views/home.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TensionExam extends StatefulWidget {
@@ -29,22 +34,20 @@ class _AddMedication2State extends State<TensionExam> {
     dateExamenController = TextEditingController();
     heureExamenController = TextEditingController();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF6F7FB),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueAccent,
         title: Text(
-          'Blood Pressure Exam',
-          style: TextStyle(
-            color: Color.fromARGB(255, 28, 89, 151), // Set text color to white
-            fontWeight: FontWeight.w600,
-          ),
+          "Blood Pressure Exam",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        // elevation: 5,
+        centerTitle: true,
+        elevation: 0,
       ),
-      backgroundColor: Colors.white, // Set background color to white
+      // Set background color to white
       body: Form(
         key: _formKey,
         child: Padding(
@@ -122,11 +125,9 @@ class _AddMedication2State extends State<TensionExam> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text_Field(
-                label: 'Date Examen',
-                hint: 'Enter Date Examen',
-                isPassword: false,
-                keyboard: TextInputType.datetime,
+              DatePickerField(
+                label: 'Date of Birth',
+                hint: 'Select Date of Birth',
                 txtEditController: dateExamenController,
                 onChanged: (value) {
                   dateExamenController.text = value;
@@ -134,11 +135,9 @@ class _AddMedication2State extends State<TensionExam> {
               ),
               const SizedBox(height: 20),
               // Heure Examen
-              Text_Field(
+              TimePickerField(
                 label: 'Heure Examen',
-                hint: 'Enter Heure Examen',
-                isPassword: false,
-                keyboard: TextInputType.text,
+                hint: 'Enter heure Examen',
                 txtEditController: heureExamenController,
                 onChanged: (value) {
                   // Handle changes in Heure Examen
@@ -156,7 +155,7 @@ class _AddMedication2State extends State<TensionExam> {
                     _saveExam();
                   },
                   title: _isLoading ? 'Is Sending...' : 'Save Exam',
-                  color: Color.fromARGB(255, 50, 70, 87),
+                  color: Colors.blue.shade900,
                 ),
               ),
             ],
@@ -176,36 +175,44 @@ class _AddMedication2State extends State<TensionExam> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
+String convert12HourTo24Hour(String time) {
+  final inputFormat = DateFormat('h:mm a');
+  final outputFormat = DateFormat('HH:mm:ss');
 
+  final timeObj = inputFormat.parse(time);
+  final formattedTime = outputFormat.format(timeObj);
+
+  return formattedTime;
+}
   _saveExam() async {
     setState(() {
       _isLoading = true;
     });
-    var timeComponents = heureExamenController.text.split(':');
-    var hour = int.parse(timeComponents[0]);
-    var minute = int.parse(timeComponents[1]);
-    var dateTime = DateTime(0, 0, 0, hour, minute);
+     String twentyFourHourTime = convert12HourTo24Hour(heureExamenController.text);
+    // var timeComponents = heureExamenController.text.split(':');
+    // var hour = int.parse(timeComponents[0]);
+    // var minute = int.parse(timeComponents[1]);
+    // var dateTime = DateTime(0, 0, 0, hour, minute);
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var token = localStorage.getString('token');
-    print('Authorization'":" 'Bearer ${token}');
+    // var token = localStorage.getString('token');
+    // print('Authorization'":" 'Bearer ${token}');
     var data = {
       "user_id": localStorage.getString('id'),
       "Systolique": systoliqueController.text,
       "Diastolique": diastoliqueController.text,
-      "date_Examen": "${dateExamenController.text} ",
-      "heure_Examen":
-          '${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}'
+      "date_Examen": dateExamenController.text,
+      "heure_Examen": twentyFourHourTime
     };
     print('aaaaaaaaaaaaaaaaaaaa ${data}');
     var res = await Network().authData(data, '/TensionExam/addTension_Exam');
     var body = json.decode(res.body);
     print('aaaaaaaaaaaaaaaaaaaa ${body}');
 
-    if (res.statusCode == 200) {
+    if (res.statusCode == 201) {
       print('aaaaaaaaaaaaaaaaaaaa');
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => YourHomePage()),
+        MaterialPageRoute(builder: (context) => Home()),
       );
     }
 

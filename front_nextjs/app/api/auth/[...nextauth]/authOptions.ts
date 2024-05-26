@@ -10,6 +10,7 @@ export interface CustomSession {
   expires: ISODateString;
 }
 export interface CustomUser {
+  _id?: any;
   id?: string | null;
   name?: string | null;
   email?: string | null;
@@ -67,7 +68,7 @@ export const authOptions: AuthOptions = {
         const res = await myAxios.post(LOGIN_URL, credentials);
         const response = res.data;
         const user = response?.user1;
-        console.log(response?.user1);
+        
         if (user) {
           return user;
         } else {

@@ -4,16 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_front/api/auth.dart';
 import 'package:flutter_front/models/category.dart';
 import 'package:flutter_front/components/drawerWidget.dart';
+import 'package:flutter_front/screens/Appointment/ListAppointment.dart';
+import 'package:flutter_front/screens/Appointment/addAppointment.dart';
 import 'package:flutter_front/screens/ExamTension/ExamTension.dart';
+import 'package:flutter_front/screens/Notifications/ListNotif.dart';
 import 'package:flutter_front/screens/auth/view/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class YourHomePage extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _YourHomePageState createState() => _YourHomePageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _YourHomePageState extends State<YourHomePage> {
+class _HomeState extends State<Home> {
   List<CategoryModel> categories = CategoryModel.getCategories();
 
   final GlobalKey<ScaffoldState> _scaffoldKey_home = GlobalKey<ScaffoldState>();
@@ -85,10 +88,18 @@ class _YourHomePageState extends State<YourHomePage> {
                         );
                         break;
                       case 'Rendez-vous':
-                        Navigator.pushNamed(context, " Routes.examTension");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Listappointment()),
+                        );
                         break;
                       case 'Notification':
-                        Navigator.pushNamed(context, " Routes.examTension");
+                       Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationScreen()),
+                        );
                         break;
                       case 'Chat':
                         Navigator.pushNamed(context, "");
@@ -152,26 +163,32 @@ class _YourHomePageState extends State<YourHomePage> {
       ),
     );
   }
-  void logout() async{
+
+  void logout() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
+    ;
+    print("aaaa");
+    var res = await Network().authData({},'/auth/logout');
+    print("aaaa");
+
+    var body = jsonDecode(res.body);
+    print(body);
+    print(res.statusCode == 200);
+    if (res.statusCode == 200) {
+      print("aaaaaaaaaaaa");
       localStorage.remove('user');
       localStorage.remove('token');
-    // print("aaaa");
-    // var res = await Network().getData('/auth/logout');
-    // print("aaaa");
+      localStorage.remove('token1');
 
-    // var body = jsonDecode(res.body);
-    // print(res.statusCode == 200);
-    // if(res.statusCode == 200){
-    // print("aaaaaaaaaaaa");
+      localStorage.remove('status');
+      localStorage.remove('id');
 
-    //   SharedPreferences localStorage = await SharedPreferences.getInstance();
-    //   localStorage.remove('user');
-    //   localStorage.remove('token');
+      //   SharedPreferences localStorage = await SharedPreferences.getInstance();
+      //   localStorage.remove('user');
+      //   localStorage.remove('token');
       // localStorage.remove('_id');
-      Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context)=>Login()));
-    // }
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+      // }
+    }
   }
 }

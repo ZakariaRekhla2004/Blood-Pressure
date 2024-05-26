@@ -6,6 +6,7 @@ import 'package:flutter_front/components/loginWidgets/ButtonWidget.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderGlobal.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderLogin.dart';
 import 'package:flutter_front/components/loginWidgets/InputField.dart';
+import 'package:flutter_front/screens/auth/view/CompleteDossier.dart';
 import 'package:flutter_front/screens/auth/view/Register.dart';
 import 'package:flutter_front/screens/home/views/home.dart';
 // import 'package:flutter_front/services/auth.dart';
@@ -21,7 +22,7 @@ class Login extends StatefulWidget {
 
 class _HomePageState extends State<Login> {
   bool _isLoading = false;
-  final _formKey = GlobalKey<FormState>(); 
+  final _formKey = GlobalKey<FormState>();
   var email;
   var password;
   // final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -53,6 +54,7 @@ class _HomePageState extends State<Login> {
     passwordController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return HeaderGlobal(
@@ -88,7 +90,6 @@ class _HomePageState extends State<Login> {
                           controller: emailController,
                           onChanged: (value) {
                             emailController.text = value;
-
                           },
                         ),
                         InputField(
@@ -123,10 +124,9 @@ class _HomePageState extends State<Login> {
                     ),
                     SizedBox(height: 30),
                     CustomButton(
-                      title: _isLoading? 'Proccessing...' : 'Login',
+                      title: _isLoading ? 'Proccessing...' : 'Login',
                       onPressed: () {
                         _login();
-      
                       },
                       color: const Color.fromARGB(255, 4, 27, 46),
                     ),
@@ -140,17 +140,20 @@ class _HomePageState extends State<Login> {
     );
   }
 
-  void _login() async {
-  setState(() {
-    _isLoading = true;
-  });
+ 
 
-  var data = {'email': emailController.text, 'password': passwordController.text};
-    print('aaaaaaaaaaaaaaaaaaaa ${data}');
+  void _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    var data = {
+      'email': emailController.text,
+      'password': passwordController.text
+    };
 
     var res = await Network().authData(data, '/auth/login');
     var body = json.decode(res.body);
-    print('aaaaaaaaaaaaaaaaaaaa ${body}');
 
     if (res.statusCode == 200) {
       print('aaaaaaaaaaaaaaaaaaaa');
@@ -158,14 +161,24 @@ class _HomePageState extends State<Login> {
       localStorage.setString('token', json.encode(body['token']));
       localStorage.setString('token1', json.encode(body['token']));
       localStorage.setString('user', json.encode(body['user']));
+      localStorage.setString('status', json.encode(body['status']));
       localStorage.setString('id', json.encode(body['_id']));
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => YourHomePage()),
-      );
-    } else {
-    }
-  setState(() {
-    _isLoading = false;
-  });
-}}
+      print(localStorage.getString('status'));
+
+      if (localStorage.getString('status') != 'Completed') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      }else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => CompleteDossier()),
+        );
+      }
+    } 
+    setState(() {
+      _isLoading = false;
+    });
+  }
+}

@@ -6,7 +6,6 @@ import 'package:flutter_front/components/loginWidgets/ButtonWidget.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderGlobal.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderLogin.dart';
 import 'package:flutter_front/components/loginWidgets/InputField.dart';
-import 'package:flutter_front/services/auth.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -87,7 +86,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           hintText: "Email ",
                           controller: emailController,
                           onChanged: (value) {
-                            // Handle email input changes
                           },
                         ),
                         InputField(

@@ -36,13 +36,15 @@ export default function Register() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
+    
+    
     await myAxios
       .post(REGISTER_URL, authState)
       .then((res) => {
         const response = res.data;
         setLoading(false);
         toast.success("Account created successfully!.");
-        if (response?.status == 201) {
+        if (res.status == 201) {
           signIn("credentials", {
             email: authState.email,
             password: authState.password,

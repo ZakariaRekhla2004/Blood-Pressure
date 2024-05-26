@@ -36,6 +36,8 @@ export default function Login() {
         const response = res.data;
         setLoading(false);
         if (response?.status == 200) {
+        toast.success("Account Loged successfully!.");
+
           signIn("credentials", {
             email: authState.email,
             password: authState.password,
