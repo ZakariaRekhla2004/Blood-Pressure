@@ -7,8 +7,10 @@ import 'package:flutter_front/components/drawerWidget.dart';
 import 'package:flutter_front/screens/Appointment/ListAppointment.dart';
 import 'package:flutter_front/screens/Appointment/addAppointment.dart';
 import 'package:flutter_front/screens/ExamTension/ExamTension.dart';
+import 'package:flutter_front/screens/Medicaments/addMedicaments.dart';
 import 'package:flutter_front/screens/Notifications/ListNotif.dart';
 import 'package:flutter_front/screens/auth/view/Login.dart';
+import 'package:flutter_front/screens/chat/chat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
@@ -102,10 +104,18 @@ class _HomeState extends State<Home> {
                         );
                         break;
                       case 'Chat':
-                        Navigator.pushNamed(context, "");
+                       Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Chat()),
+                        );
                         break;
                       case 'Medicament':
-                        Navigator.pushNamed(context, "");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddMedication()),
+                        );
                         break;
                       // Ajoutez d'autres cas pour chaque nom de catégorie que vous souhaitez gérer
                       default:

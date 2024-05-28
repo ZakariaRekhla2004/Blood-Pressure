@@ -1,11 +1,13 @@
 // ignore_for_file: file_names, library_private_types_in_public_api
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_front/api/auth.dart';
 import 'package:flutter_front/components/loginWidgets/ButtonWidget.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderGlobal.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderLogin.dart';
 import 'package:flutter_front/components/loginWidgets/InputField.dart';
+import 'package:flutter_front/screens/auth/ForgetPassword.dart';
 import 'package:flutter_front/screens/auth/view/CompleteDossier.dart';
 import 'package:flutter_front/screens/auth/view/Register.dart';
 import 'package:flutter_front/screens/home/views/home.dart';
@@ -102,20 +104,17 @@ class _HomePageState extends State<Login> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30),
-                    Text("Forgot Password?",
-                        style: TextStyle(color: Colors.grey, fontSize: 16)),
-                    SizedBox(height: 10),
+                    SizedBox(height: 25),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RegisterPage()),
+                              builder: (context) => Forgetpassword()),
                         );
                       },
                       child: Text(
-                        "Create new account",
+                        "Forgot Password?",
                         style: TextStyle(
                             color: Colors.blue,
                             fontSize: 16,
@@ -140,8 +139,6 @@ class _HomePageState extends State<Login> {
     );
   }
 
- 
-
   void _login() async {
     setState(() {
       _isLoading = true;
@@ -152,6 +149,15 @@ class _HomePageState extends State<Login> {
       'password': passwordController.text
     };
 
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } catch (e) {
+      print('Sign-in error: $e');
+    }
+
     var res = await Network().authData(data, '/auth/login');
     var body = json.decode(res.body);
 
@@ -161,6 +167,7 @@ class _HomePageState extends State<Login> {
       localStorage.setString('token', json.encode(body['token']));
       localStorage.setString('token1', json.encode(body['token']));
       localStorage.setString('user', json.encode(body['user']));
+      localStorage.setString('email', json.encode(body['email']));
       localStorage.setString('status', json.encode(body['status']));
       localStorage.setString('id', json.encode(body['_id']));
       print(localStorage.getString('status'));
@@ -170,13 +177,13 @@ class _HomePageState extends State<Login> {
           context,
           MaterialPageRoute(builder: (context) => Home()),
         );
-      }else {
+      } else {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => CompleteDossier()),
         );
       }
-    } 
+    }
     setState(() {
       _isLoading = false;
     });
