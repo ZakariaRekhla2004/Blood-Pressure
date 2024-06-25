@@ -1,4 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_front/api/auth.dart';
+import 'package:flutter_front/screens/Appointment/addAppointment.dart';
+import 'package:flutter_front/screens/BMI/bmi.dart';
+import 'package:flutter_front/screens/ExamTension/ExamDisplay.dart';
+import 'package:flutter_front/screens/ExamTension/ExamTension.dart';
+import 'package:flutter_front/screens/ExamTension/TensionApi.dart';
+import 'package:flutter_front/screens/auth/view/Login.dart';
+import 'package:flutter_front/screens/chat/chat.dart';
+import 'package:flutter_front/screens/home/views/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -8,6 +20,7 @@ class DrawerWidget extends StatefulWidget {
   @override
   _DrawerWidgetState createState() => _DrawerWidgetState();
 }
+
 class _DrawerWidgetState extends State<DrawerWidget> {
   late double _screenWidth;
 
@@ -19,103 +32,165 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 250,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 1.5,
       child: Drawer(
-        child: Container(
-          width: _screenWidth,
-          child: Stack(
-            children: [
-              // Top container with black color
-              Container(
-                color: Color.fromARGB(255, 16, 72, 111),
-                height: _screenWidth / 4,
-              ),
-              Positioned(
-                top: _screenWidth / 4,
-                child: SizedBox(
-                  width: _screenWidth,
-                  height: double.infinity, // Fills remaining space
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // User profile section
-                      SizedBox(
-                        height: 150, // Adjust height as needed
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              top: 0,
-                              left: 0,
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                                child: Image.asset(
-                                  'assets/icons8-appointment-48.png',
-                                  fit: BoxFit.fill,
-                                  height: 100,
-                                  width: 100,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 20,
-                              left: 120,
-                              child: Text(
-                                'Profile',
-                                style: TextStyle(
-                                  color: Colors.white, // Change text color to white
-                                  fontSize: 25,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Menu options
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, left: 20.0),
-                        child: Column(
-                          children: const [
-                            Text(
-                              'Appointment',
-                              style: TextStyle(
-                                color: Colors.white, // Change text color to white
-                                fontSize: 25,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 6.0, bottom: 6.0),
-                              child: Text(
-                                'My Cart',
-                                style: TextStyle(
-                                  color: Colors.white, // Change text color to white
-                                  fontSize: 25,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+        child: Column(
+          children: [
+            // Top container with custom text decoration
+            Container(
+              color: Color.fromARGB(255, 16, 72, 111),
+              height: _screenWidth / 4,
+              alignment: Alignment.center,
+              child: Text(
+                'BP Tracker',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10.0,
+                      color: Colors.black54,
+                      offset: Offset(3.0, 3.0),
+                    ),
+                  ],
                 ),
               ),
-              Positioned(
-                bottom: 50,
-                left: 20,
-                child: Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Colors.white, // Change text color to white
-                    fontSize: 25,
+            ),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.home,
+                        color: Color.fromARGB(255, 36, 118, 199)),
+                    title: Text(
+                      'Home',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Home()));
+                    },
                   ),
-                ),
+                  ListTile(
+                    leading: Icon(Icons.person,
+                        color: Color.fromARGB(255, 36, 118, 199)),
+                    title: Text(
+                      'Profile',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/profile');
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.add,
+                        color: Color.fromARGB(255, 36, 118, 199)),
+                    title: Text(
+                      'Appointment',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Appointment(0)));
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.favorite,
+                        color: Color.fromARGB(255, 36, 118, 199)),
+                    title: Text(
+                      'Blood Pressure Exam',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DisplayTension()));
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.chat,
+                        color: Color.fromARGB(255, 36, 118, 199)),
+                    title: Text(
+                      'Chat',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ChatPage()));
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.directions_run,
+                        color: Color.fromARGB(255, 36, 118, 199)),
+                    title: Text(
+                      'Add Activity',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => BMI()));
+                  
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.logout,
+                        color: Color.fromARGB(255, 36, 118, 199)),
+                    title: Text(
+                      'Logout',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      logout(context);
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  void logout(BuildContext context) async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+
+    try {
+      var res = await Network().authData({}, '/auth/logout');
+      var body = jsonDecode(res.body);
+
+      if (res.statusCode == 200) {
+        localStorage.remove('user');
+        localStorage.remove('token');
+        localStorage.remove('token1');
+        localStorage.remove('status');
+        localStorage.remove('id');
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
+      } else {
+        // Handle error if status code is not 200
+        print('Logout failed: ${body['message']}');
+      }
+    } catch (e) {
+      // Handle any exceptions during the network request
+      print('Error occurred during logout: $e');
+    }
   }
 }

@@ -3,7 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Network {
+  // String get _url => 'http://192.168.1.3:8000/api';
   final String _url = 'http://10.0.2.2:8000/api';
+
   //if you are using android studio emulator, change localhost to 10.0.2.2
   var token;
   var token1;
@@ -21,9 +23,20 @@ class Network {
   authData(data, apiUrl) async {
     print("aaaaaaaaaaaaaaaaaaabbbbbbbcccbbbbbbbbbbbbaaaaaaaaaaa");
     var fullUrl = _url + apiUrl;
-    print("aaaaaaaaaaaaaaaaaaabbbbbbbbbbccccbbbbbbbbbaaaaaaaaaaa");
     return await http.post(Uri.parse(fullUrl),
         body: jsonEncode(data), headers: await _setHeaders());
+  }
+  updateData(data, apiUrl) async {
+    print("aaaaaaaaaaaaaaaaaaabbbbbbbcccbbbbbbbbbbbbaaaaaaaaaaa");
+    var fullUrl = _url + apiUrl;
+    return await http.put(Uri.parse(fullUrl),
+        body: jsonEncode(data), headers: await _setHeaders());
+  }
+   deleteData1(data, apiUrl) async {
+    print("aaaaaaaaaaaaaaaaaaabbbbbbbcccbbbbbbbbbbbbaaaaaaaaaaa");
+    var fullUrl = _url + apiUrl;
+    print("aaaaaaaaaaaaaaaaaaabbbbbbbbbbccccbbbbbbbbbaaaaaaaaaaa");
+    return await http.delete(Uri.parse(fullUrl),body: jsonEncode(data), headers: await _setHeaders());
   }
 
   getData(apiUrl) async {
@@ -31,10 +44,15 @@ class Network {
     var fullUrl = _url + apiUrl;
     return await http.get(Uri.parse(fullUrl), headers: await _setHeaders());
   }
+    deleteData(apiUrl) async {
+    print("aaaaaaaaaaaaaaaaaaabbbbbbbcccbbbbbbbbbbbbaaaaaaaaaaa");
+    var fullUrl = _url + apiUrl;
+    return await http.delete(Uri.parse(fullUrl), headers: await _setHeaders());
+  }
 _setHeaders() async {
   SharedPreferences localStorage = await SharedPreferences.getInstance();
   var token2 = localStorage.getString('token') != null ? jsonDecode(localStorage.getString('token')!) : null;
-  print(token2);
+  // print(token2);
   var headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',

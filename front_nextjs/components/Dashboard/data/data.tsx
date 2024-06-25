@@ -33,20 +33,20 @@ import { ArrowDownIcon, ArrowRightIcon, ArrowUpIcon } from "lucide-react"
     },
   ]
   
-  // export const priorities = [
-  //   {
-  //     label: "Low",
-  //     value: "low",
-  //     icon: ArrowDownIcon,
-  //   },
-  //   {
-  //     label: "Medium",
-  //     value: "medium",
-  //     icon: ArrowRightIcon,
-  //   },
-  //   {
-  //     label: "High",
-  //     value: "high",
-  //     icon: ArrowUpIcon,
-  //   },
-  // ]
+  export const priorities = [
+    {
+      label: "Low",
+      value: "Low",
+      icon: ArrowDownIcon,
+    },
+    {
+      label: "Medium",
+      value: "Medium",
+      icon: ArrowRightIcon,
+    },
+    {
+      label: "High",
+      value: "High",
+      icon: ArrowUpIcon,
+    },
+  ]

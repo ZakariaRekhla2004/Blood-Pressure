@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_front/api/auth.dart';
 import 'package:flutter_front/screens/Appointment/addAppointment.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class Listappointment extends StatefulWidget {
   @override
@@ -10,14 +10,56 @@ class Listappointment extends StatefulWidget {
 }
 
 class _ListappointmentState extends State<Listappointment> {
-  Future<List<dynamic>> fetchData() async {
+  Map<DateTime, List<dynamic>> _appointments = {};
+  late Future<void> _fetchDataFuture;
+  DateTime _selectedDay = DateTime.now();
+  List<dynamic> _selectedEvents = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchDataFuture = _fetchData();
+  }
+
+  _delete(event) async {
+    print(event);
+    var res =
+        await Network().deleteData('/apppoint/deleteAppointment?id=$event');
+    // var body = json.decode(res.body);
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
     var res = await Network().getData('/apppoint/getAppointment');
-    print( json.decode(res.body));
     if (res.statusCode == 200) {
-      return json.decode(res.body);
+      List<dynamic> appointments = json.decode(res.body);
+      setState(() {
+        _appointments = {};
+        for (var appointment in appointments) {
+          DateTime date = DateTime.parse(appointment['date']);
+          DateTime normalizedDate = DateTime(date.year, date.month, date.day);
+          if (_appointments[normalizedDate] == null) {
+            _appointments[normalizedDate] = [];
+          }
+          _appointments[normalizedDate]?.add(appointment);
+        }
+        _selectedEvents = _appointments[_normalizeDate(_selectedDay)] ?? [];
+      });
     } else {
       throw Exception('Failed to load appointments');
     }
+  }
+
+  DateTime _normalizeDate(DateTime date) {
+    return DateTime(date.year, date.month, date.day);
+  }
+
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    setState(() {
+      _selectedDay = selectedDay;
+      _selectedEvents = _appointments[_normalizeDate(selectedDay)] ?? [];
+    });
+    print(_selectedEvents);
   }
 
   @override
@@ -33,49 +75,20 @@ class _ListappointmentState extends State<Listappointment> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: FutureBuilder<List<dynamic>>(
-        future: fetchData(),
+      body: FutureBuilder<void>(
+        future: _fetchDataFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            List<dynamic> appointments = snapshot.data ?? [];
-            List<Widget> waitingAppointments = [];
-            List<Widget> acceptedAppointments = [];
-            List<Widget> rejectedAppointments = [];
-
-            for (var appointment in appointments) {
-              Widget row = BuildRow(
-                date: appointment['date'],
-                time: appointment['heure'],
-                status: appointment['status'],
-              );
-              if (appointment['status'] == 'Waiting') {
-                waitingAppointments.add(row);
-              } else if (appointment['status'] == 'Accept') {
-                acceptedAppointments.add(row);
-              } else if (appointment['status'] == 'Reject') {
-                rejectedAppointments.add(row);
-              }
-            }
-
-            return SingleChildScrollView(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildStatusSection(
-                      context, "Waiting Appointments", waitingAppointments),
-                  SizedBox(height: 10.0),
-                  _buildStatusSection(
-                      context, "Accepted Appointments", acceptedAppointments),
-                  SizedBox(height: 10.0),
-                  _buildStatusSection(
-                      context, "Rejected Appointments", rejectedAppointments),
-                ],
-              ),
+            return Column(
+              children: [
+                _buildCalendar(),
+                const SizedBox(height: 16.0),
+                Expanded(child: _buildEventList()),
+              ],
             );
           }
         },
@@ -101,57 +114,110 @@ class _ListappointmentState extends State<Listappointment> {
     );
   }
 
-  Widget _buildStatusSection(
-      BuildContext context, String title, List<Widget> rows) {
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent,
+  Widget _buildCalendar() {
+    return TableCalendar(
+      focusedDay: DateTime.now(),
+      firstDay: DateTime.utc(2020, 1, 1),
+      lastDay: DateTime.utc(2030, 12, 31),
+      calendarFormat: CalendarFormat.month,
+      eventLoader: (day) {
+        DateTime normalizedDate = _normalizeDate(day);
+        // print("Loading events for day: $normalizedDate");
+        // print("Events: ${_appointments[normalizedDate]}");
+        return _appointments[normalizedDate] ?? [];
+      },
+      onDaySelected: _onDaySelected,
+      selectedDayPredicate: (day) {
+        return isSameDay(_selectedDay, day);
+      },
+      calendarBuilders: CalendarBuilders(
+        markerBuilder: (context, date, events) {
+          // print("Marker builder for date: $date with events: $events");
+          if (events.isNotEmpty) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: events.map((event) {
+                var eventMap = event as Map<String, dynamic>;
+                var status = eventMap['status'];
+
+                Color color;
+                if (status == 'Waiting') {
+                  color = Colors.yellow;
+                } else if (status == 'Accept') {
+                  color = Colors.green;
+                } else if (status == 'Rejected') {
+                  color = Colors.red;
+                } else {
+                  color = Colors.grey;
+                }
+                return Container(
+                  margin: const EdgeInsets.all(2.0),
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: color,
                   ),
-            ),
-            Divider(
-              color: Colors.grey[300],
-              height: 20,
-              thickness: 1,
-            ),
-            Column(children: rows),
-          ],
-        ),
+                );
+              }).toList(),
+            );
+          }
+          return null;
+        },
       ),
     );
   }
-}
 
-class BuildRow extends StatelessWidget {
-  final String date;
-  final String time;
-  final String status;
-
-  BuildRow({required this.date, required this.time, required this.status});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(date),
-        Text(time),
-        Text(status),
-      ],
-    );
+  Widget _buildEventList() {
+    if (_selectedEvents.isEmpty) {
+      return Center(
+        child: Text("No events for the selected day."),
+      );
+    } else {
+      return ListView.builder(
+        itemCount: _selectedEvents.length,
+        itemBuilder: (context, index) {
+          var event = _selectedEvents[index];
+          Color color;
+          if (event['status'] == 'Waiting') {
+            color = Color.fromARGB(255, 177, 188, 29);
+          } else if (event['status'] == 'Accept') {
+            color = Color.fromARGB(255, 96, 212, 99);
+          } else if (event['status'] == 'Rejected') {
+            color = Color.fromARGB(255, 244, 130, 122);
+          } else {
+            color = Colors.grey;
+          }
+          return Card(
+            color: color,
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: ListTile(
+              title: Text(
+                'Appointment : ${event['status']}',
+                style: TextStyle(
+                  fontSize: 18, // Example font size
+                  fontWeight: FontWeight.bold, // Example font weight
+                  color: Colors.black, // Example text color
+                ),
+              ),
+              subtitle: Text(
+                'Date: ${event['date']}, Time: ${event['heure']}',
+                style: TextStyle(
+                  fontSize: 16, // Example font size
+                  color: Color.fromARGB(255, 50, 43, 43),
+                ),
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.delete,
+                    color: Color.fromARGB(255, 218, 215, 215)),
+                onPressed: () {
+                  _delete(event['_id']);
+                },
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 }
-

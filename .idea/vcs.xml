@@ -2,7 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/back_end/Suivi_Tension" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/flutter_skelton" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/laravel_api_squelete" vcs="Git" />
   </component>
 </project>

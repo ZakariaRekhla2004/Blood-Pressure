@@ -9,11 +9,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu1";
-import { BadgeCheck, BadgeCheckIcon, BellIcon } from "lucide-react";
+import { BellIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { useState } from "react";
 import { updateAppoint } from "@/dataFetch/updateAppoint";
+
 interface Notification {
   status: "unread" | "read" | "rejected"; // Update status type for better type safety
   _id: string;
@@ -34,23 +35,27 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ user, data }) => {
   const [notifications, setNotifications] = useState(data.notification);
 
-  const handleRead = (id: string) => {
+  const handleRead = async (id: string) => {
     setNotifications((prev) =>
       prev.map((notif) =>
         notif._id === id ? { ...notif, status: "read", read: true } : notif
       )
     );
+    const updateData = { status: "read" };
+    await updateAppoint(user.token!, updateData, id);
   };
 
-  const handleReject = (id: string) => {
+  const handleReject = async (id: string) => {
     setNotifications((prev) =>
       prev.map((notif) =>
         notif._id === id ? { ...notif, status: "rejected", read: true } : notif
       )
     );
+    const updateData = { status: "rejected" };
+    await updateAppoint(user.token!, updateData, id);
   };
 
-  const unreadCount = notifications.filter((notif) => notif.read === false).length;
+  const unreadCount = notifications.filter((notif) => !notif.read).length;
 
   return (
     <DropdownMenu>
@@ -77,8 +82,10 @@ const Navbar: React.FC<NavbarProps> = ({ user, data }) => {
           notifications.map((notification) => (
             <DropdownMenuItem
               key={notification._id}
-              className={`flex justify-between shadow-sm my-1  hover:bg-slate-200 shadow-slate-300 items-center ${
-                  notification.status  === "read"
+              className={`flex justify-between shadow-sm my-1 hover:bg-slate-200 shadow-slate-300 items-center ${
+                notification.read
+                  ? "bg-gray-100"
+                  : notification.status === "read"
                   ? "bg-green-100"
                   : notification.status === "rejected"
                   ? "bg-red-100"
@@ -97,7 +104,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, data }) => {
                     height={30}
                     alt="approve"
                     onClick={async () => {
-                      handleRead(notification._id);
+                      await handleRead(notification._id);
                       const data = { status: "Accept" };
                       await updateAppoint(user.token!, data, notification._id);
                     }}
@@ -110,7 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, data }) => {
                     height={30}
                     alt="reject"
                     onClick={async () => {
-                      handleReject(notification._id);
+                      await handleReject(notification._id);
                       const data = { status: "Rejected" };
                       await updateAppoint(user.token!, data, notification._id);
                     }}

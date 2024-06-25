@@ -9,6 +9,15 @@ export function Cards({ user }: { user: CustomUser }) {
     totalPatients: 0,
     patientsThisMonth: 0,
     percentageChange: 0,
+    Appointments : {
+    nbr : 0,
+    pass : 0,
+    },
+    notifications :{
+      notification :0 ,
+      read : 0,
+    }
+    
   });
 
   useEffect(() => {
@@ -73,8 +82,8 @@ export function Cards({ user }: { user: CustomUser }) {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-blue-400">10</div>
-          <p className="text-xs text-muted-foreground">4 Rendez vous passé</p>
+          <div className="text-2xl font-bold text-blue-400">{data.Appointments.nbr}</div>
+          <p className="text-xs text-muted-foreground">{data.Appointments.pass} Rendez vous passé</p>
         </CardContent>
       </Card>
       <Card>
@@ -95,8 +104,8 @@ export function Cards({ user }: { user: CustomUser }) {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold text-blue-400">8</div>
-          <p className="text-xs text-muted-foreground">3 already read</p>
+          <div className="text-2xl font-bold text-blue-400">{data.notifications.notification}</div>
+          <p className="text-xs text-muted-foreground">{data.notifications.read} already read</p>
         </CardContent>
       </Card>
       <Card>

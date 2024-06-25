@@ -29,6 +29,7 @@ import { CustomUser } from "@/app/api/auth/[...nextauth]/authOptions";
 import { toast } from "react-toastify";
 // import { getImageUrl } from "@/lib/utils";
 import UserAvatar from "../common/UserAvatar";
+import { auth } from "@/app/firebase";
 
 export default function ProfileMenu({ user }: { user: CustomUser }) {
  
@@ -69,6 +70,8 @@ export default function ProfileMenu({ user }: { user: CustomUser }) {
         // console.log("aaaaaaaaa", user);
         toast.error("Something !");
       });
+      await auth.signOut();
+
   };
 
   const updateProfile = (event: React.FormEvent) => {

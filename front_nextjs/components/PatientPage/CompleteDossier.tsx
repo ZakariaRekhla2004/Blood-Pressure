@@ -22,6 +22,7 @@ import React, { useState } from "react";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/authOptions";
 import { API_URL, REGISTER_URL } from "@/lib/apiEndPoints";
 import { useRouter } from "next/navigation";
+import { Select,SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 const FormSchema = z.object({
   weight: z.string(),
@@ -83,7 +84,7 @@ export function CompleteDossier({ user, id }: { user: CustomUser, id: String }) 
       family_history: familyHistory,
       personal_history: personal_history,
     };
-    
+    // console.log(data1);
     try {
       const res = await myAxios.post(
         API_URL+ `/dossier/completeDossier?id=${id}`,
@@ -160,13 +161,19 @@ export function CompleteDossier({ user, id }: { user: CustomUser, id: String }) 
               name="gender"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Gender</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter the gender of the patient"
-                      {...field}
-                    />
-                  </FormControl>
+                  <FormLabel>Gender :</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Gender" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Male">Male</SelectItem>
+                      <SelectItem value="Female">Female</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -176,7 +183,7 @@ export function CompleteDossier({ user, id }: { user: CustomUser, id: String }) 
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>City</FormLabel>
+                  <FormLabel>City :</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Enter the city of the patient"
@@ -192,13 +199,20 @@ export function CompleteDossier({ user, id }: { user: CustomUser, id: String }) 
               name="marital_status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Marital Status</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter the marital status of the patient"
-                      {...field}
-                    />
-                  </FormControl>
+                  <FormLabel>Marital Status :</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Marital Status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Single">Single</SelectItem>
+                      <SelectItem value="Married">Married</SelectItem>
+                      <SelectItem value="Divorced">Divorced</SelectItem>
+                      <SelectItem value="Widowed">Widowed</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

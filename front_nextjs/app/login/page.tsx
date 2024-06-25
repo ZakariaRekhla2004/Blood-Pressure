@@ -9,7 +9,7 @@ export default function login() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
       <div className="hidden lg:flex justify-center items-center h-screen">
         <Image
-          src="/Doctors-bro.svg"
+          src="/Doctors-bro (1).svg"
           width={500}
           height={500}
           alt="Doctors-bro"
@@ -22,8 +22,8 @@ export default function login() {
           <h1 className="text-cabbage font-bold text-2xl md:text-3xl mt-2 ">
           A healthy lifestyle is a happy life.          </h1>
         </div>
-        <Tabs defaultValue="login" className="w-full px-4 md:w-[500px]">
-          <TabsList className="grid w-full grid-cols-2">
+        <Tabs defaultValue="login" className="w-full px-4 md:w-[500px] ">
+          <TabsList className="grid w-full grid-cols-2  shadow-sm shadow-slate-400 ">
             <TabsTrigger value="login">Login</TabsTrigger>
             <TabsTrigger value="register">Register</TabsTrigger>
           </TabsList>

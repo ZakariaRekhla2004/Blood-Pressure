@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_front/api/auth.dart';
-import 'package:flutter_front/components/HoursPicker.dart';
+import 'package:flutter_front/components/hourspicker.dart';
 import 'package:flutter_front/components/loginWidgets/ButtonWidget.dart';
 import 'package:flutter_front/screens/Appointment/ListAppointment.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -42,7 +42,7 @@ class _AppointmentState extends State<Appointment> {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     return Scaffold(
-       backgroundColor: Color(0xFFF6F7FB),
+      backgroundColor: Color(0xFFF6F7FB),
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         title: Text(
@@ -52,7 +52,6 @@ class _AppointmentState extends State<Appointment> {
         centerTitle: true,
         elevation: 0,
       ),
-      
       body: Container(
         height: size.height,
         width: size.width,
@@ -125,23 +124,11 @@ class _AppointmentState extends State<Appointment> {
                         if (_formKey.currentState!.validate()) {
                           if (selectedDate != null &&
                               heureExamenController != null) {
-                                
                             // Save the date and time
                             print("Selected Date: $selectedDate");
                             print(
                                 "Selected Time: ${heureExamenController.text}");
-                                _saveExam();
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 1),
-                                backgroundColor: Colors.green,
-                                content: Text(
-                                  "You have booked",
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            );
+                            _saveExam();
                           } else {
                             // Show error message
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -153,7 +140,8 @@ class _AppointmentState extends State<Appointment> {
                           }
                         }
                       },
-                  title: _isLoading ? 'Is Sending...' : 'Book an Appointment',
+                      title:
+                          _isLoading ? 'Is Sending...' : 'Book an Appointment',
                       color: Colors.blue.shade900,
                     ),
                   ),
@@ -178,46 +166,67 @@ class _AppointmentState extends State<Appointment> {
       ),
     );
   }
+
   String convert12HourTo24Hour(String time) {
-  final inputFormat = DateFormat('h:mm a');
-  final outputFormat = DateFormat('HH:mm:ss');
+    final inputFormat = DateFormat('h:mm a');
+    final outputFormat = DateFormat('HH:mm:ss');
 
-  final timeObj = inputFormat.parse(time);
-  final formattedTime = outputFormat.format(timeObj);
+    final timeObj = inputFormat.parse(time);
+    final formattedTime = outputFormat.format(timeObj);
 
-  return formattedTime;
-}
+    return formattedTime;
+  }
+
   _saveExam() async {
     setState(() {
       _isLoading = true;
     });
-     String twentyFourHourTime = convert12HourTo24Hour(heureExamenController.text);
-    // var timeComponents = heureExamenController.text.split(':');
-    // var hour = int.parse(timeComponents[0]);
-    // var minute = int.parse(timeComponents[1]);
-    // var dateTime = DateTime(0, 0, 0, hour, minute);
+
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    // var token = localStorage.getString('token');
-    // print('Authorization'":" 'Bearer ${token}');
+
     var data = {
-      'date' : DateFormat('yyyy-MM-dd').format(selectedDate!),
-      'heure' : twentyFourHourTime,
-      'status' : "Waiting"
+      'date': DateFormat('yyyy-MM-dd').format(selectedDate!),
+      'heure': heureExamenController.text,
+      'status': "Waiting"
     };
-    print('aaaaaaaaaaaaaaaaaaaa ${data}');
+
     var res = await Network().authData(data, '/apppoint/createAppointment');
     var body = json.decode(res.body);
-    print('aaaaaaaaaaaaaaaaaaaa ${body}');
-    if (res.statusCode == 201) {
-      print('aaaaaaaaaaaaaaaaaaaa');
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Listappointment()),
-      );
-    }
 
     setState(() {
       _isLoading = false;
     });
+
+    if (res.statusCode == 201) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Listappointment()),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: Duration(seconds: 1),
+          backgroundColor: Colors.green,
+          content: Text(
+            "You have booked",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    } else if (res.statusCode == 409 &&
+        body['error'] == 'Appointment slot is already booked') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(body['error']),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("An error occurred. Please try again later."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }

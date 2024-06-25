@@ -9,12 +9,16 @@ class DatePickerField extends StatefulWidget {
     required this.hint,
     required this.txtEditController,
     required this.onChanged,
+    this.initialValue, 
+    
   }) : super(key: key);
 
   final String label;
   final String hint;
   final TextEditingController txtEditController;
   final void Function(String value) onChanged;
+  final String? initialValue; 
+
 
   @override
   _DatePickerFieldState createState() => _DatePickerFieldState();
@@ -23,22 +27,25 @@ class _DatePickerFieldState extends State<DatePickerField> {
   Future<void> _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+       initialDate: widget.initialValue != null
+        ? DateFormat('yyyy-MM-dd').parse(widget.initialValue!)
+        : DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime(2100),
     );
+
     if (picked != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(picked);
       setState(() {
         widget.txtEditController.text = formattedDate;
-      });
+      }); 
       widget.onChanged(formattedDate);
     }
   }
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: widget.txtEditController,
+      controller: widget.txtEditController ,
       readOnly: true,
       onTap: () => _selectDate(context),
       decoration: InputDecoration(

@@ -2,12 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_front/api/auth.dart';
+import 'package:flutter_front/components/MenuDropDown.dart';
 import 'package:flutter_front/models/category.dart';
 import 'package:flutter_front/components/drawerWidget.dart';
 import 'package:flutter_front/screens/Appointment/ListAppointment.dart';
 import 'package:flutter_front/screens/Appointment/addAppointment.dart';
+import 'package:flutter_front/screens/BMI/bmi.dart';
+import 'package:flutter_front/screens/ExamTension/ExamDisplay.dart';
 import 'package:flutter_front/screens/ExamTension/ExamTension.dart';
 import 'package:flutter_front/screens/Medicaments/addMedicaments.dart';
+import 'package:flutter_front/screens/Medicaments/display.dart';
 import 'package:flutter_front/screens/Notifications/ListNotif.dart';
 import 'package:flutter_front/screens/auth/view/Login.dart';
 import 'package:flutter_front/screens/chat/chat.dart';
@@ -21,13 +25,17 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<CategoryModel> categories = CategoryModel.getCategories();
 
-  final GlobalKey<ScaffoldState> _scaffoldKey_home = GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldKey_home = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      key: _scaffoldKey,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           'BP Tracker',
@@ -42,28 +50,12 @@ class _HomeState extends State<Home> {
           icon: Icon(Icons.menu),
           iconSize: 30,
           onPressed: () {
-            _scaffoldKey_home.currentState?.openDrawer();
+            _scaffoldKey.currentState?.openDrawer();
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.account_circle),
-            color: Color.fromARGB(255, 36, 118, 199),
-
-            iconSize: 35,
-            // Profile icon
-            onPressed: () {
-              logout();
-              // Navigate to the page displaying user information
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => UserProfilePage()),
-              // );
-            },
-          ),
-        ],
+        actions: const [PopupMenuButtonWidget()],
       ),
-      drawer: DrawerWidget(scaffoldKey: _scaffoldKey_home),
+      drawer: DrawerWidget(scaffoldKey: _scaffoldKey),
       body: Center(
         // Wrap the ListView with a Center widget
         child: ListView(
@@ -86,7 +78,7 @@ class _HomeState extends State<Home> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TensionExam()),
+                              builder: (context) => DisplayTension()),
                         );
                         break;
                       case 'Rendez-vous':
@@ -97,29 +89,32 @@ class _HomeState extends State<Home> {
                         );
                         break;
                       case 'Notification':
-                       Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => NotificationScreen()),
                         );
                         break;
                       case 'Chat':
-                       Navigator.push(
+                        Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => Chat()),
+                          MaterialPageRoute(builder: (context) => ChatPage()),
+                        );
+                        break;
+                      case 'Activity':
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => BMI()),
                         );
                         break;
                       case 'Medicament':
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AddMedication()),
+                              builder: (context) => Medication()),
                         );
                         break;
-                      // Ajoutez d'autres cas pour chaque nom de catégorie que vous souhaitez gérer
                       default:
-                        // Cas par défaut si le nom de la catégorie ne correspond à aucun cas
                         print('Unknown category: ${categories[index].name}');
                     }
                   },
@@ -141,18 +136,33 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
+                          width: 60,
+                          height: 70,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Image.asset(
+                              // widget.categories[index].iconPath,
                               categories[index].iconPath,
                             ),
                           ),
                         ),
+                        // Container(
+                        //   width: 50,
+                        //   height: 50,
+                        //   decoration: BoxDecoration(
+                        //     shape: BoxShape.circle,
+                        //   ),
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.all(2.0),
+                        //     child: Image.asset(
+                        //       categories[index].iconPath,
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(height: 15),
                         Text(
                           categories[index].name,
@@ -178,7 +188,7 @@ class _HomeState extends State<Home> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     ;
     print("aaaa");
-    var res = await Network().authData({},'/auth/logout');
+    var res = await Network().authData({}, '/auth/logout');
     print("aaaa");
 
     var body = jsonDecode(res.body);

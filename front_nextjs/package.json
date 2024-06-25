@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@fullcalendar/core": "^6.1.10",
     "@fullcalendar/daygrid": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
@@ -17,6 +19,8 @@
     "@fullcalendar/resource-timeline": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
     "@hookform/resolvers": "^3.4.0",
+    "@mui/material": "^5.15.19",
+    "@mui/x-charts": "^7.6.2",
     "@nextui-org/button": "^2.0.31",
     "@nextui-org/modal": "^2.0.33",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -34,6 +38,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "firebase": "^10.12.2",
     "link-preview-js": "^3.0.5",
     "lucide-react": "^0.358.0",
     "moment": "^2.30.1",
@@ -41,6 +46,7 @@
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
+    "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.51.4",
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.3.0",

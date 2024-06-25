@@ -44,39 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC_qmoUNqQprMHKgIMpxr5Dhj6xTHHDCHE',
-    appId: '1:664158563402:android:b126c93ba1d627f0a00ab3',
-    messagingSenderId: '664158563402',
-    projectId: 'bp-tracker-b9ad0',
-    storageBucket: 'bp-tracker-b9ad0.appspot.com',
+    apiKey: 'AIzaSyC3j3si-M-mJ55gVHg0p7KjmTQUSWZW3m0',
+    appId: '1:335839091282:android:ee768f67adef06fb68dd8b',
+    messagingSenderId: '335839091282',
+    projectId: 'chat1-7f804',
+    storageBucket: 'chat1-7f804.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAhcDEykPDD-CbhZ0X-MADUwlamm3HNUck',
-    appId: '1:664158563402:ios:3606f3dd9e9ad031a00ab3',
-    messagingSenderId: '664158563402',
-    projectId: 'bp-tracker-b9ad0',
-    storageBucket: 'bp-tracker-b9ad0.appspot.com',
+    apiKey: 'AIzaSyB5uGqTPFc-Ti5KhTWFhT80IClCBYYRDwE',
+    appId: '1:335839091282:ios:2e6812538e04943a68dd8b',
+    messagingSenderId: '335839091282',
+    projectId: 'chat1-7f804',
+    storageBucket: 'chat1-7f804.appspot.com',
     iosBundleId: 'com.example.flutterFront',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAhcDEykPDD-CbhZ0X-MADUwlamm3HNUck',
-    appId: '1:664158563402:ios:3606f3dd9e9ad031a00ab3',
-    messagingSenderId: '664158563402',
-    projectId: 'bp-tracker-b9ad0',
-    storageBucket: 'bp-tracker-b9ad0.appspot.com',
+    apiKey: 'AIzaSyB5uGqTPFc-Ti5KhTWFhT80IClCBYYRDwE',
+    appId: '1:335839091282:ios:2e6812538e04943a68dd8b',
+    messagingSenderId: '335839091282',
+    projectId: 'chat1-7f804',
+    storageBucket: 'chat1-7f804.appspot.com',
     iosBundleId: 'com.example.flutterFront',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAyzH9HeQIS5ea14pZ2fg-3pXBNZLudgvk',
-    appId: '1:664158563402:web:37a56ad1d9ae84cfa00ab3',
-    messagingSenderId: '664158563402',
-    projectId: 'bp-tracker-b9ad0',
-    authDomain: 'bp-tracker-b9ad0.firebaseapp.com',
-    storageBucket: 'bp-tracker-b9ad0.appspot.com',
-    measurementId: 'G-7C0D8SBDBD',
+    apiKey: 'AIzaSyDs9NSYy9eI33NMpKZiBbsQGRV0MkEobbM',
+    appId: '1:335839091282:web:0472630f3c6670e568dd8b',
+    messagingSenderId: '335839091282',
+    projectId: 'chat1-7f804',
+    authDomain: 'chat1-7f804.firebaseapp.com',
+    storageBucket: 'chat1-7f804.appspot.com',
   );
 
 }

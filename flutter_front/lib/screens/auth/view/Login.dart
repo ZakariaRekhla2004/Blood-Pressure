@@ -1,7 +1,6 @@
-// ignore_for_file: file_names, library_private_types_in_public_api
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_front/Firebase/service.dart';
 import 'package:flutter_front/api/auth.dart';
 import 'package:flutter_front/components/loginWidgets/ButtonWidget.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderGlobal.dart';
@@ -9,11 +8,9 @@ import 'package:flutter_front/components/loginWidgets/HeaderLogin.dart';
 import 'package:flutter_front/components/loginWidgets/InputField.dart';
 import 'package:flutter_front/screens/auth/ForgetPassword.dart';
 import 'package:flutter_front/screens/auth/view/CompleteDossier.dart';
-import 'package:flutter_front/screens/auth/view/Register.dart';
+import 'package:flutter_front/screens/auth/view/ResetPassword.dart';
 import 'package:flutter_front/screens/home/views/home.dart';
-// import 'package:flutter_front/services/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -25,24 +22,9 @@ class Login extends StatefulWidget {
 class _HomePageState extends State<Login> {
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
-  var email;
-  var password;
-  // final _scaffoldKey = GlobalKey<ScaffoldState>();
-  // _showMsg(msg) {
-  //   final snackBar = SnackBar(
-  //     content: Text(msg),
-  //     action: SnackBarAction(
-  //       label: 'Close',
-  //       onPressed: () {
-  //         // Some code to undo the change!
-  //       },
-  //     ),
-  //   );
-  //   _scaffoldKey.currentState.showSnackBar(snackBar());
-  // }
-
   late TextEditingController emailController;
   late TextEditingController passwordController;
+
   @override
   void initState() {
     super.initState();
@@ -80,15 +62,15 @@ class _HomePageState extends State<Login> {
                 child: Column(
                   children: <Widget>[
                     Image.asset(
-                      "assets/Doctors-pana.png", // Adjust the image path
-                      width: 300, // Adjust the image width as needed
-                      height: 200, // Adjust the image height as needed
+                      "assets/Doctors-pana.png",
+                      width: 300,
+                      height: 200,
                       fit: BoxFit.cover,
                     ),
                     Column(
                       children: <Widget>[
                         InputField(
-                          hintText: "Email ",
+                          hintText: "Email",
                           controller: emailController,
                           onChanged: (value) {
                             emailController.text = value;
@@ -110,20 +92,22 @@ class _HomePageState extends State<Login> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Forgetpassword()),
+                            builder: (context) => Forgetpassword(),
+                          ),
                         );
                       },
                       child: Text(
                         "Forgot Password?",
                         style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 16,
-                            decoration: TextDecoration.underline),
+                          color: Colors.blue,
+                          fontSize: 16,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                     SizedBox(height: 30),
                     CustomButton(
-                      title: _isLoading ? 'Proccessing...' : 'Login',
+                      title: _isLoading ? 'Processing...' : 'Login',
                       onPressed: () {
                         _login();
                       },
@@ -140,6 +124,15 @@ class _HomePageState extends State<Login> {
   }
 
   void _login() async {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Email and Password cannot be empty'),
+        ),
+      );
+      return;
+    }
+
     setState(() {
       _isLoading = true;
     });
@@ -148,42 +141,81 @@ class _HomePageState extends State<Login> {
       'email': emailController.text,
       'password': passwordController.text
     };
-
+  final authService = AuthService();
+   
+   
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
+    print('Signed in successfully');
+
+    await authService.signInWithEmailPassword1(
+      emailController.text,
+      passwordController.text,
+    );
+    print('Signed in successfully');
+  } catch (e) {
+    try {
+      print(emailController.text);
+      await authService.createUserWithEmailAndPassword(
+        emailController.text,
+        passwordController.text,
       );
+      print('User created successfully');
     } catch (e) {
-      print('Sign-in error: $e');
+      print('Failed to create user: $e');
     }
+  }
+    try {
+      var res = await Network().authData(data, '/auth/login');
+      var body = json.decode(res.body);
 
-    var res = await Network().authData(data, '/auth/login');
-    var body = json.decode(res.body);
+      if (res.statusCode == 200) {
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
+        localStorage.setString('token', json.encode(body['token']));
+        localStorage.setString('token1', json.encode(body['token']));
+        localStorage.setString('user', json.encode(body['user']));
+        localStorage.setString('email', json.encode(body['email']));
+        localStorage.setString('status', json.encode(body['status']));
+        localStorage.setString('id', json.encode(body['_id']));
 
-    if (res.statusCode == 200) {
-      print('aaaaaaaaaaaaaaaaaaaa');
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('token', json.encode(body['token']));
-      localStorage.setString('token1', json.encode(body['token']));
-      localStorage.setString('user', json.encode(body['user']));
-      localStorage.setString('email', json.encode(body['email']));
-      localStorage.setString('status', json.encode(body['status']));
-      localStorage.setString('id', json.encode(body['_id']));
-      print(localStorage.getString('status'));
-
-      if (localStorage.getString('status') != 'Completed') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Home()),
+        if (json.encode(body['resetpassword']) == 'false') {
+          if (localStorage.getString('status') != "Completed") {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => Home()),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => CompleteDossier()),
+            );
+          }
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ResetPassword()),
+          );
+        }
+      } else if (res.statusCode == 401) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Unauthorized: Invalid email or password'),
+          ),
         );
       } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => CompleteDossier()),
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${res.statusCode}'),
+          ),
         );
       }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('An error occurred: $e'),
+        ),
+      );
     }
+
     setState(() {
       _isLoading = false;
     });

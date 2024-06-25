@@ -1,35 +1,44 @@
 // ignore_for_file: library_private_types_in_public_api
-
 import 'dart:async';
+import 'dart:convert';
+import 'package:alarm/alarm.dart';
+import 'package:alarm/model/alarm_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_front/firebase_options.dart';
+import 'package:flutter_front/screens/Medicaments/alarmreminder.dart';
 import 'package:flutter_front/screens/auth/view/Login.dart';
+import 'package:flutter_front/screens/auth/view/ResetPassword.dart';
 import 'package:flutter_front/screens/home/views/home.dart';
 import 'package:flutter_front/utils/Routes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_front/firebase_options.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+
 
 import 'package:shared_preferences/shared_preferences.dart';
 // import './screens/auth/';
 // import 'firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
-void main() async {
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  await Alarm.init();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+  );
+  flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
   );
   runApp(MyApp());
 }
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(MyApp());
-// }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,6 +67,7 @@ late Timer _logoutTimer;
 void initState() {
   _checkIfLoggedIn();
   super.initState();
+   _configureSelectNotificationSubject();
 }
 
 @override
@@ -65,6 +75,38 @@ void dispose() {
   _logoutTimer.cancel(); // Cancel the timer when the widget is disposed
   super.dispose();
 }
+  void _configureSelectNotificationSubject() {
+    flutterLocalNotificationsPlugin.initialize(
+      const InitializationSettings(
+        android: AndroidInitializationSettings('app_icon'),
+      ),
+      onDidReceiveNotificationResponse: (NotificationResponse response) async {
+        if (response.payload != null) {
+          Map<String, dynamic> payloadMap = jsonDecode(response.payload!);
+          int alarmId = payloadMap['alarmId'];
+          String notificationBody = payloadMap['notificationBody'];
+
+          AlarmSettings alarmSettings = AlarmSettings(
+            id: alarmId,
+            dateTime: DateTime.now(),
+            assetAudioPath: '',
+            loopAudio: false,
+            vibrate: false,
+            notificationTitle: 'Medication Reminder',
+            notificationBody: notificationBody,
+            fadeDuration: 1,
+          );
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AlarmScreen(alarmSettings: alarmSettings),
+            ),
+          );
+        }
+      },
+    );
+  }
 
 void _checkIfLoggedIn() async {
   SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -79,7 +121,7 @@ void _checkIfLoggedIn() async {
 
 void _startLogoutTimer() {
   var tokenExpireTime = 1440;
-  if (tokenExpireTime != null) {
+  
     var tokenExpireTime1 = tokenExpireTime * 60 * 1000;
     var remainingTime = tokenExpireTime1 - DateTime.now().millisecondsSinceEpoch - (5 * 60 * 1000);
     if (remainingTime > 0) {
@@ -87,7 +129,7 @@ void _startLogoutTimer() {
     } else {
       _logout();
     }
-  }
+ 
 }
 
 void _logout() async {
@@ -105,6 +147,8 @@ void _logout() async {
 
     if (!isAuth) {
       child = Login();
+      // child = ResetPassword();
+        // child = Home();
     } else {
         child = Home();
     }

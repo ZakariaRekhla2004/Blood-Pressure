@@ -4,10 +4,11 @@ import { ColumnDef } from "@tanstack/react-table";
 
 // import { Checkbox } from "@/registry/new-york/ui/checkbox"
 
-import { statuses } from "./data/data";
+import { priorities, statuses } from "./data/data";
 import { Task } from "./data/schema";
 import { DataTableRowActions } from "./data-table-row-actions";
 import { DataTableColumnHeader } from "./data-table-column-header";
+import { useState } from "react";
 
 
 export const columns: ColumnDef<Task>[] = [
@@ -43,9 +44,9 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "created_at",
+    accessorKey: "date_naissance",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Date de création" />
+      <DataTableColumnHeader column={column} title="Date de naissance" />
     ),
     cell: ({ row }) => {
       return (
@@ -53,7 +54,9 @@ export const columns: ColumnDef<Task>[] = [
           <span className="max-w-[500px] truncate font-medium">
           {
           //@ts-ignore 
-          row.getValue("created_at").slice(0, 10)}
+          row.getValue("date_naissance")
+          // .slice(0, 10) 
+        }
           </span>
         </div>
       );
@@ -101,46 +104,46 @@ export const columns: ColumnDef<Task>[] = [
       return value.includes(row.getValue(id));
     },
   },
-  // {
-  //   accessorKey: "priority",
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title="Preassure" />
-  //   ),
-  //   cell: ({ row }) => {
-  //     const priority = priorities.find(
-  //       (priority) => priority.value === row.getValue("priority")
-  //     );
-  //     const [Color, setColors] = useState("");
+  {
+    accessorKey: "latest_exam",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Preassure" />
+    ),
+    cell: ({ row }) => {
+      const priority = priorities.find(
+        (priority) => priority.value === row.getValue("latest_exam")
+      );
+      const [Color, setColors] = useState("");
 
-  //     if (!priority) {
-  //       return null;
-  //     }
+      if (!priority) {
+        return null;
+      }
 
-  //     return (
-  //       <div className="flex items-center">
-  //         {priority.icon && (
-  //           <priority.icon className={
-  //             priority.label === "High" || priority.label === "Low"
-  //               ? "text-red-600 font-bold mr-2 h-4 w-4 text-muted-foreground"
-  //               : "mr-2 h-4 w-4 text-muted-foreground"
-  //           } />
-  //         )}
-  //         <span
-  //           className={
-  //             priority.label === "High" || priority.label === "Low"
-  //               ? "text-red-600 font-bold"
-  //               : ""
-  //           }
-  //         >
-  //           {priority.label}
-  //         </span>
-  //       </div>
-  //     );
-  //   },
-  //   filterFn: (row, id, value) => {
-  //     return value.includes(row.getValue(id));
-  //   },
-  // },F
+      return (
+        <div className="flex items-center">
+          {priority.icon && (
+            <priority.icon className={
+              priority.label === "High" || priority.label === "Low"
+                ? "text-red-600 font-bold mr-2 h-4 w-4 text-muted-foreground"
+                : "mr-2 h-4 w-4 text-muted-foreground"
+            } />
+          )}
+          <span
+            className={
+              priority.label === "High" || priority.label === "Low"
+                ? "text-red-600 font-bold"
+                : ""
+            }
+          >
+            {priority.label}
+          </span>
+        </div>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+  },
   {
     id: "actions",
     cell:  ({ row }) => { return(<DataTableRowActions row={row}  />);},

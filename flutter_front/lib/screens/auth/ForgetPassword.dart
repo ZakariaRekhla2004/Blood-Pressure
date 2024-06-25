@@ -6,6 +6,7 @@ import 'package:flutter_front/components/loginWidgets/ButtonWidget.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderGlobal.dart';
 import 'package:flutter_front/components/loginWidgets/HeaderLogin.dart';
 import 'package:flutter_front/components/loginWidgets/InputField.dart';
+import 'package:flutter_front/screens/auth/view/Login.dart';
 
 class Forgetpassword extends StatefulWidget {
   @override
@@ -43,9 +44,14 @@ class _ForgetpasswordState extends State<Forgetpassword> {
         // 'phone_number': phoneNumberController.text,
       };
       print(data);
-      var res = await Network().authData(data, '/auth/register');
+      var res = await Network().authData(data, '/auth/forgetPassword');
       var body = jsonDecode(res.body);
+      print(body);
       if (res.statusCode == 201) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
         // Navigator.push(context, route)
       } else {
         // Handle errors

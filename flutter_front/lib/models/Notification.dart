@@ -1,37 +1,37 @@
 class NotificationItem {
   final String id;
   final String sender;
+   String title;
+
   final String recever;
   final String message;
-  final String appointId;
+  final String appointmentId;
   bool isRead;
   final DateTime updatedAt;
   final DateTime createdAt;
-  final String title;
 
   NotificationItem({
     required this.id,
+    required this.title,
     required this.sender,
     required this.recever,
     required this.message,
-    required this.appointId,
+    required this.appointmentId,
     required this.isRead,
     required this.updatedAt,
     required this.createdAt,
-    required this.title,
   });
-
   factory NotificationItem.fromJson(Map<String, dynamic> json) {
     return NotificationItem(
       id: json['_id'],
       sender: json['sender'],
+      title: json['title'],
       recever: json['recever'],
       message: json['message'],
-      appointId: json['appoint_id'],
+      appointmentId: json['appoint_id'],
       isRead: json['read'],
       updatedAt: DateTime.parse(json['updated_at']),
       createdAt: DateTime.parse(json['created_at']),
-      title: json['title'],
     );
   }
 }

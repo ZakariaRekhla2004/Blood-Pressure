@@ -1,12 +1,12 @@
 "use server"
+
 import {
   authOptions,
   CustomSession,
 } from "@/app/api/auth/[...nextauth]/authOptions";
+import DifferentLength from "@/components/Charts/Line";
 import { getMoreInfo } from "@/dataFetch/getMoreInfo";
-import { log } from "console";
 import { getServerSession } from "next-auth";
-import { json } from "node:stream/consumers";
 
 export default async function page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -71,6 +71,7 @@ export default async function page({ params }: { params: { id: string } }) {
           </div>
         </div>
       </section>
+      {/* <DifferentLength/> */}
       <section className="grid grid-cols-1 md:grid-row-3 gap-2 p-3 md:p-3">
         <div className="bg-white rounded-lg shadow-blue-100 shadow-lg p-4 space-y-4 dark:bg-gray-950">
           <h3 className="text-xl font-bold">Medicament </h3>
@@ -78,6 +79,9 @@ export default async function page({ params }: { params: { id: string } }) {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Medicament Picture
+                  </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nom
                   </th>
@@ -87,9 +91,9 @@ export default async function page({ params }: { params: { id: string } }) {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Mg_g
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Qr
-                  </th>
+                  </th> */}
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Temps
                   </th>
@@ -100,17 +104,20 @@ export default async function page({ params }: { params: { id: string } }) {
                   (medication: any, index: any) => (
                     <tr key={index}>
                       <td className="px-6 py-4 whitespace-nowrap">
+                       {/* <Image src={medication?.Qr} alt={""} width={60}  height={60} />  */}
+                        <img src={`data:image/png;base64,${medication?.Qr}`} alt="Image"  className="w-7 h-9"/> 
+                       {/* {medication?.Qr} */}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
                         {medication?.Nom}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {medication?.doze ? medication?.doze : "N/A"}
+                        {medication?.Doze ? medication?.Doze : "N/A"}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {medication?.Mg_g}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {medication?.Qr}
-                      </td>
+                      
                       <td className="px-6 py-4 whitespace-nowrap">
                         {medication?.Temps ? medication?.Temps.join(", ") : "N/A"}
                       </td>

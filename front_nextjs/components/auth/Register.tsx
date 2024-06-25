@@ -15,7 +15,9 @@ import { toast } from "react-toastify";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 import myAxios from "@/lib/axios.config";
-
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth, doc, firestore, setDoc } from "@/app/firebase";
+import { string } from "zod";
 export default function Register() {
   const [loading, setLoading] = useState<boolean>(false);
   const [authState, setAuthState] = useState<AuthStateType>({
@@ -37,7 +39,19 @@ export default function Register() {
     event.preventDefault();
     setLoading(true);
     
-    
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      authState.email! ,
+     authState.password!,
+    );
+    console.log(auth.currentUser);
+    // const user = userCredential.user;
+    if (userCredential.user) {
+      await setDoc(doc(firestore, "Users", userCredential.user.uid), {
+        uid: userCredential.user!.uid,
+        email: authState.email,
+      });
+    }
     await myAxios
       .post(REGISTER_URL, authState)
       .then((res) => {
@@ -56,6 +70,7 @@ export default function Register() {
         setAuthState({});
       })
       .catch((err) => {
+        console.log(err);
         setLoading(false);
         if (err.response?.status == 422) {
           setErrors(err.response?.data?.errors);

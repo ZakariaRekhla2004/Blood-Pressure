@@ -7,11 +7,11 @@ export const taskSchema = z.object({
   name : z.string(),
   email : z.string(),
   // medecin : z.string(),
-  // date_naissance : z.date(),
+  // date_naissance : z.date() || null,
   // created_at: z.date(),
   status: z.string(),
   // label: z.string(),
-  // priority: z.string(),
+  // latest_exam: z.string() || '',
 })
 
 export type Task = z.infer<typeof taskSchema>

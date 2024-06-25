@@ -14,29 +14,12 @@ import { taskSchema } from "@/components/Dashboard/data/schema";
 import { Cards } from "@/components/Dashboard/Cards";
 import { Fullcalendar } from "@/components/Dashboard/appoint/Appointement";
 import { getAppoint } from "@/dataFetch/getAppoint";
-// import Posts from "@/components/post/Posts";
-// async function getTasks() {
-//   try {
-//     const data = await fs.readFile(
-//       path.join(process.cwd(), "app/(daily_dev)/tasks.json")
-//     );
-//     const tasks = JSON.parse(data.toString());
-//     return z.array(taskSchema).parse(tasks);
-//   } catch (error: any) {
-//     if (error.code === "ENOENT") {
-//       console.error("tasks.json file not found");
-//       return [];
-//     }
-//     throw error;
-//   }
-// }
+import { getUsers } from "@/dataFetch/getUsers";
+
 export default async function App() {
   const session = (await getServerSession(authOptions)) as CustomSession;
-  // const posts: APIResponseType<PostApiType> = await getPosts(
-  //   session.user?.token!
-  // );
-  // const tasks = await getTasks();
-  const data = await getAppoint(session.user!.token!);
+ 
+  const users = await getUsers(session.user?.token!);
   return (
     <div className="w-full pl-2 h-full">
       {/* <Posts data={posts} user={session.user!} /> */}
@@ -44,7 +27,9 @@ export default async function App() {
 
       {/* <DataTableToolbar table={table} /> */}
       
-      <Fullcalendar data={data}/>
+      {/* <Fullcalendar data={data}/> */}
+      <DataTable data={users.hypo} columns={columns} />
+
       {/* <DataTable data={tasks} columns={columns} /> */}
     </div>
   );

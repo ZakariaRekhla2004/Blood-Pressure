@@ -1,8 +1,7 @@
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
-import { Search, Flame, ArrowBigUp, Link as LinkIcon } from "lucide-react";
-import { ChatBubbleIcon, PlusCircledIcon } from "@radix-ui/react-icons";
+import { UsersIcon } from "lucide-react";
+import { ChatBubbleIcon } from "@radix-ui/react-icons";
 // import AddPost from "../post/AddPost";
 
 export default function SidebarLinks() {
@@ -17,12 +16,12 @@ export default function SidebarLinks() {
       <ul>
       <li>
           <Link href="/Patient" className="mb-4 flex space-x-3 items-center">
-            <Search className="w-5 h-5" />
+            <UsersIcon className="w-5 h-5" />
             <p>Mes Patient</p>
           </Link>
         </li>
         <li>
-          <Link href="/" className="flex space-x-3 items-center mb-4">
+          <Link href="/Chat" className="flex space-x-3 items-center mb-4">
             <ChatBubbleIcon className="w-5 h-5" />
             <p> Chat </p>
           </Link>
@@ -30,18 +29,14 @@ export default function SidebarLinks() {
 
         <li>
           <Link href="/Appointment" className="mb-4 flex space-x-3 items-center">
-            <PlusCircledIcon className="w-5 h-5" />
+            {/* <Ap className="w-5 h-5" /> */}
+            
+             <Image src="/icons8-appointment-100.png" alt={""}   width={20} height={20}/>
             <p>Appointment</p>
           </Link>
         </li>
       </ul>
 
-      {/* <p className="my-2 font-bold text-muted-foreground">Contribute</p>
-      <ul>
-        <li>
-          {/* <AddPost /> */}
-        {/* </li>
-      </ul> */} 
     </div>
   );
 }

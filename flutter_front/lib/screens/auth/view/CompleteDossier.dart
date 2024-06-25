@@ -4,6 +4,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_front/api/auth.dart';
 import 'package:flutter_front/components/DatePicker.dart';
+import 'package:flutter_front/components/ScrollDatePickrt.dart';
 import 'package:flutter_front/components/SelectField.dart';
 import 'package:flutter_front/components/TextField.dart';
 import 'package:flutter_front/components/loginWidgets/ButtonWidget.dart';
@@ -110,7 +111,7 @@ class _CompleteDossierState extends State<CompleteDossier> {
                 ],
               ),
               const SizedBox(height: 15),
-              DatePickerField(
+              ScrollDatePickerField(
                 label: 'Date of Birth',
                 hint: 'Select Date of Birth',
                 txtEditController: dateOfBirthController,
@@ -167,8 +168,8 @@ class _CompleteDossierState extends State<CompleteDossier> {
   
 
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-      var id=  localStorage.getString('id');
-      print(id);
+      var id= localStorage.getString('id');
+      
 
     var data = {
       "weight": weightController.text,
@@ -180,13 +181,11 @@ class _CompleteDossierState extends State<CompleteDossier> {
       "family_history": [familyHistoryController.text],
       "personal_history": [personalHistoryController.text],
     };
-    print(data);
+    print(jsonDecode(id!));
     var res =
-        await Network().authData(data, '/dossier/completeDossier?id=${id}');
+        await Network().authData(data, '/dossier/completeDossier?id=${jsonDecode(id!)}');
         var body = json.decode(res.body);
     print(body );
-
-
 
         if (res.statusCode == 201) {
 
@@ -195,9 +194,9 @@ class _CompleteDossierState extends State<CompleteDossier> {
             MaterialPageRoute(builder: (context) => Home()),
           );
         }
-
         setState(() {
           _isLoading = false;
         });
-      }
+ 
     }
+}

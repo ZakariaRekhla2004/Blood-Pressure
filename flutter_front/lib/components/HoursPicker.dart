@@ -20,20 +20,23 @@ class TimePickerField extends StatefulWidget {
 }
 
 class _TimePickerFieldState extends State<TimePickerField> {
-  TimeOfDay? selectedTime;
+  int? selectedHour;
 
-  Future<void> _selectTime(BuildContext context) async {
-    TimeOfDay? picked = await showTimePicker(
+  Future<void> _selectHour(BuildContext context) async {
+    int? pickedHour = await showDialog<int>(
       context: context,
-      initialTime: TimeOfDay.now(),
-      initialEntryMode: TimePickerEntryMode.input,
+      builder: (BuildContext context) {
+        return _HourPickerDialog();
+      },
     );
-    if (picked != null && picked != selectedTime) {
+
+    if (pickedHour != null && pickedHour != selectedHour) {
       setState(() {
-        selectedTime = picked;
+        selectedHour = pickedHour;
       });
-      widget.txtEditController.text = picked.format(context);
-      widget.onChanged(picked.format(context));
+      String hourString = pickedHour.toString().padLeft(2, '0') + ":00";
+      widget.txtEditController.text = hourString;
+      widget.onChanged(hourString);
     }
   }
 
@@ -44,34 +47,76 @@ class _TimePickerFieldState extends State<TimePickerField> {
         vertical: 2.0,
       ),
       child: InkWell(
-        onTap: () => _selectTime(context),
+        onTap: () => _selectHour(context),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           elevation: 1,
           color: Color.fromARGB(255, 210, 233, 238),
-          // fillColor: Color.fromARGB(255, 210, 233, 238),
-
           child: Center(
             child: SizedBox(
               height: 50,
-              width: 150,
+              width: 160,
               child: Center(
                 child: Text(
-                  selectedTime != null
-                      ? selectedTime!.format(context)
+                  selectedHour != null
+                      ? selectedHour!.toString().padLeft(2, '0') + ":00"
                       : widget.hint,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
-                    // letterSpacing: 3,
                   ),
                 ),
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HourPickerDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Select Hour',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 20),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(13, (index) {
+                  int hour = 8 + index; // Hours from 8 to 20
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(hour);
+                      },
+                      child: Text(hour.toString().padLeft(2, '0')),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ],
         ),
       ),
     );

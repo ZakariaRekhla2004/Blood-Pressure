@@ -1,6 +1,5 @@
 import { LOGIN_URL } from "@/lib/apiEndPoints";
 import myAxios from "@/lib/axios.config";
-import axios, { AxiosResponse } from "axios";
 import { AuthOptions, ISODateString, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -32,10 +31,8 @@ export const authOptions: AuthOptions = {
         // console.log("The  is", user);
       }
       if (user) {
-      
         token.user = user;
         // console.log("The token is", user);
-
       }
       return token;
     },
@@ -50,6 +47,7 @@ export const authOptions: AuthOptions = {
       user: User;
     }) {
       session.user = token.user as CustomUser;
+
       // console.log("The token is", token);
       // user =  as CustomUser;
       // console.log("The s", session.user);
@@ -68,7 +66,6 @@ export const authOptions: AuthOptions = {
         const res = await myAxios.post(LOGIN_URL, credentials);
         const response = res.data;
         const user = response?.user1;
-        
         if (user) {
           return user;
         } else {

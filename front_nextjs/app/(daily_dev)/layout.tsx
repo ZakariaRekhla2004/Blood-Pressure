@@ -14,6 +14,15 @@ export default async function DailyDevLayout({
   children: React.ReactNode;
 }>) {
   const session = (await getServerSession(authOptions)) as CustomSession;
+  if (!session || !session.user || !session.user.token) {
+    
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
   return (
     <div className="h-full">
       <Navbar user={session.user!} />

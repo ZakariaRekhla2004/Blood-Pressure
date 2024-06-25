@@ -15,6 +15,9 @@ import { CHECK_CREDENTIALS } from "@/lib/apiEndPoints";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import myAxios from "@/lib/axios.config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, doc, firestore, setDoc } from "@/app/firebase";
+// import { auth } from "@/app/firebase";
 
 export default function Login() {
   const [authState, setAuthState] = useState({
@@ -27,17 +30,30 @@ export default function Login() {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      authState.email,
+     authState.password,
+    );
+    console.log(auth.currentUser);
+    // const user = userCredential.user;
+    if (userCredential.user) {
+      await setDoc(doc(firestore, "Users", userCredential.user.uid), {
+        uid: userCredential.user!.uid,
+        email: authState.email,
+      });
+    }
     myAxios
       .post(CHECK_CREDENTIALS, authState)
       .then((res) => {
         const response = res.data;
+        console.log(response);
         setLoading(false);
         if (response?.status == 200) {
         toast.success("Account Loged successfully!.");
-
           signIn("credentials", {
             email: authState.email,
             password: authState.password,

@@ -7,7 +7,7 @@ import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { DataTableViewOptions } from "./data-table-view-options"
 
-import {  statuses } from "./data/data"
+import {  priorities, statuses } from "./data/data"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
 
 interface DataTableToolbarProps<TData> {
@@ -38,13 +38,13 @@ export function DataTableToolbar<TData>({
             
           />
         )}
-        {/* {table.getColumn("priority") && (
+        {table.getColumn("latest_exam") && (
           <DataTableFacetedFilter
-            column={table.getColumn("priority")}
+            column={table.getColumn("latest_exam")}
             title="Preassure"
             options={priorities}
           />
-        )} */}
+        )}
         {isFiltered && (
           <Button
             variant="ghost"

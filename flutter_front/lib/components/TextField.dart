@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Text_Field extends StatelessWidget {
   Text_Field({
-    super.key,
+    Key? key,
     required this.label,
     required this.hint,
     required this.isPassword,
     required this.keyboard,
     required this.txtEditController,
-    // required this.focusNode,
     required this.onChanged,
+    this.initialValue, 
   });
 
   final String label;
@@ -20,16 +20,19 @@ class Text_Field extends StatelessWidget {
   final TextInputType keyboard;
   final TextEditingController txtEditController;
   final void Function(String value) onChanged;
-  // late FocusNode focusNode;
+  final String? initialValue; 
 
   @override
   Widget build(BuildContext context) {
+    if (initialValue != null) {
+      txtEditController.text = initialValue!;
+    }
+    
     return TextField(
-      // focusNode: focusNode,
       keyboardType: keyboard,
       obscureText: isPassword,
       controller: txtEditController,
-      onChanged: onChanged,  
+      onChanged: onChanged,
       cursorColor: const Color.fromARGB(255, 7, 82, 96),
       decoration: InputDecoration(
         hintText: hint,

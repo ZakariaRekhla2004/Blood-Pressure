@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { auth, firestore } from "@/app/firebase";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+import { doc, setDoc } from "firebase/firestore";
 import Image from "next/image";
 import myAxios from "@/lib/axios.config";
 import { toast } from "react-toastify";
@@ -23,6 +24,7 @@ import { useState } from "react";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/authOptions";
 import { REGISTER_URL } from "@/lib/apiEndPoints";
 import { useRouter } from "next/navigation";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -65,7 +67,7 @@ export function AddPatient({ user }: { user: CustomUser }) {
       console.log("Response: ", res.data);
       const response = res.data;
       setLoading(false);
-      console.log(response);
+      console.log(response);      
 
       if (response?.status === 201) {
         toast.success("Account created successfully!");
